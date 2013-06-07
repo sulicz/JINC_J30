@@ -120,7 +120,7 @@ class NewslettersModelNewsletter extends JModel {
         }
 
         if ($newsletter->get('captcha') > CAPTCHA_NO) {
-            include_once JPATH_COMPONENT . DS . 'securimage' . DS . 'securimage.php';
+            include_once JPATH_COMPONENT . DIRECTORY_SEPARATOR . 'securimage' . DIRECTORY_SEPARATOR . 'securimage.php';
 
             $captcha_code = JRequest::getString('captcha_code', '');
             $securimage = new Securimage();

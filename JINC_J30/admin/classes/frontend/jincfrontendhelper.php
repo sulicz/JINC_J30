@@ -65,7 +65,7 @@ class JINCFrontnedHelper {
                 }
             }
             $datasent = $message->datasent;
-            $attachment = str_replace(DS, '/', $message->attachment);
+            $attachment = str_replace(DIRECTORY_SEPARATOR, '/', $message->attachment);
             $link_att = JRoute::_('images/' . $attachment);
             echo '<tr class="row' . ($i % 2) . '">';
             echo '<td width="50%">';

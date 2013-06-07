@@ -31,7 +31,7 @@ class TableTemplate extends JTable {
             $array['cssfile'] = $array['id'] . '.css';
             jimport('joomla.filesystem.folder');
             jimport('joomla.filesystem.file');
-            $cssfile_abs = JPATH_COMPONENT_ADMINISTRATOR . DS . 'assets' . DS . 'templates' . DS . $array['cssfile'];
+            $cssfile_abs = JPATH_COMPONENT_ADMINISTRATOR . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . $array['cssfile'];
             if (file_put_contents($cssfile_abs, $array['cssfile_content']) === FALSE ) {               
                 $this->setError(sprintf ( JText::_( 'COM_JINC_ERROR_WRITINGFILE' ), $cssfile_abs));
                 return false;

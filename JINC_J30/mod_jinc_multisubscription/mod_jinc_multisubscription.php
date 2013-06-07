@@ -24,7 +24,7 @@ jimport('joomla.filesystem.file');
 
 // Preload the JINCFactory
 jimport('joomla.filesystem.file');
-require_once JPATH_ADMINISTRATOR . DS . 'components' . DS . 'com_jinc' . DS . 'classes' . DS . 'factory.php';
+require_once JPATH_ADMINISTRATOR . DIRECTORY_SEPARATOR . 'components' . DIRECTORY_SEPARATOR . 'com_jinc' . DIRECTORY_SEPARATOR . 'classes' . DIRECTORY_SEPARATOR . 'factory.php';
 
 $lang = JFactory::getLanguage();
 $lang->load('com_jinc');

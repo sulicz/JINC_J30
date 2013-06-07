@@ -129,10 +129,10 @@ class BulkMessage extends Message {
             $msg_attachment = $this->get('attachment');
             $arr_attachment = $msg_attachment->toArray();
             foreach ($arr_attachment as $key => $value) {
-                $attachment = str_replace('/', DS, $value);
+                $attachment = str_replace('/', DIRECTORY_SEPARATOR, $value);
                 if (strlen($attachment)) {
-                    $logger->finer('BulkMessage: adding attachment ' . $path_abs_root . DS . $attachment);
-                    $mailmsg->addAttachment($path_abs_root . DS . $attachment);
+                    $logger->finer('BulkMessage: adding attachment ' . $path_abs_root . DIRECTORY_SEPARATOR . $attachment);
+                    $mailmsg->addAttachment($path_abs_root . DIRECTORY_SEPARATOR . $attachment);
                 }
             }
 

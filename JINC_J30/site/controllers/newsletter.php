@@ -47,7 +47,7 @@ class NewslettersControllerNewsletter extends NewslettersController {
         if ($model->subscribe($id, $info, $attributes, $mod_jinc, $notices)) {
             $gateway->assignRef('msg', $model->getState('message'));
             if ($af_redir > 0) {
-                // require_once(JPATH_SITE . DS . 'components' . DS . 'com_content' . DS . 'helpers' . DS . 'route.php');
+                // require_once(JPATH_SITE . DIRECTORY_SEPARATOR . 'components' . DIRECTORY_SEPARATOR . 'com_content' . DIRECTORY_SEPARATOR . 'helpers' . DIRECTORY_SEPARATOR . 'route.php');
                 // $link = JRoute::_(ContentHelperRoute::getArticleRoute($af_redir));
                 $link = JRoute::_('index.php?option=com_content&view=article&id=' . $af_redir);
                 $this->setRedirect($link, $model->getState('message'));

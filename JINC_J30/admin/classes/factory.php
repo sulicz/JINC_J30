@@ -44,9 +44,9 @@ class JINCFactory {
  */
     function jincimport($className, $component = 'com_jinc', $base = 'classes') {
         $parts = explode('.', $className); // Break apart at dots
-        $newClassName = JPATH_ADMINISTRATOR.DS.'components'.DS.$component.DS;
-        $newClassName .= (strlen($base) > 0)?$base.DS:'';
-        $newClassName .= implode(DS,$parts); // Glue the pieces with the directory separator
+        $newClassName = JPATH_ADMINISTRATOR.DIRECTORY_SEPARATOR.'components'.DIRECTORY_SEPARATOR.$component.DIRECTORY_SEPARATOR;
+        $newClassName .= (strlen($base) > 0)?$base.DIRECTORY_SEPARATOR:'';
+        $newClassName .= implode(DIRECTORY_SEPARATOR,$parts); // Glue the pieces with the directory separator
         $newClassName .= '.php';
         
         if(!JFile::exists($newClassName)) {

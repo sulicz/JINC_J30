@@ -90,8 +90,8 @@ class JINCControllerNewsletter extends JControllerForm {
         $type = JRequest::getString('type', 'cvs');
         if ($type == 'manual') {
             $csvtemp = JRequest::getVar('csvtemp', array());            
-            $path_abs_root = JPATH_ADMINISTRATOR . DS . 'components' . DS;
-            $path_rel = 'com_jinc' . DS . 'csvtemp.csv';
+            $path_abs_root = JPATH_ADMINISTRATOR . DIRECTORY_SEPARATOR . 'components' . DIRECTORY_SEPARATOR;
+            $path_rel = 'com_jinc' . DIRECTORY_SEPARATOR . 'csvtemp.csv';
             if ($fh = fopen($path_abs_root . $path_rel, 'w')) {
                 fwrite($fh, implode(',', $csvtemp));
                 fclose($fh);

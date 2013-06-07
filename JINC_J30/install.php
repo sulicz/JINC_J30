@@ -84,7 +84,7 @@ class com_jincInstallerScript {
 
                 // Set the installation path
                 if (!empty($mname)) {
-                    $inst_parent->setPath('extension_root', $mclient->path . DS . 'modules' . DS . $mname);
+                    $inst_parent->setPath('extension_root', $mclient->path . DIRECTORY_SEPARATOR . 'modules' . DIRECTORY_SEPARATOR . $mname);
                 } else {
                     $inst_parent->abort(JText::_('Module') . ' ' . JText::_('Install') . ': ' . JText::_('No module file specified'));
                     return false;
@@ -201,7 +201,7 @@ class com_jincInstallerScript {
                 $porder = $plugin->getAttribute('order');
 
                 if (!empty($pname) && !empty($pgroup)) {
-                    $inst_parent->setPath('extension_root', JPATH_ROOT . DS . 'plugins' . DS . $pgroup . DS . $pname);
+                    $inst_parent->setPath('extension_root', JPATH_ROOT . DIRECTORY_SEPARATOR . 'plugins' . DIRECTORY_SEPARATOR . $pgroup . DIRECTORY_SEPARATOR . $pname);
                 } else {
                     $inst_parent->abort(JText::_('Plugin') . ' ' . JText::_('Install') . ': ' . JText::_('No plugin file specified'));
                     return false;
@@ -309,7 +309,7 @@ class com_jincInstallerScript {
 
                 // Set the installation path
                 if (!empty($mname)) {
-                    $inst_parent->setPath('extension_root', $mclient->path . DS . 'modules' . DS . $mname);
+                    $inst_parent->setPath('extension_root', $mclient->path . DIRECTORY_SEPARATOR . 'modules' . DIRECTORY_SEPARATOR . $mname);
                 } else {
                     $inst_parent->abort(JText::_('Module') . ' ' . JText::_('Install') . ': ' . JText::_('No module file specified'));
                     return false;
@@ -403,7 +403,7 @@ class com_jincInstallerScript {
 
                 // Set the installation path
                 if (!empty($pname) && !empty($pgroup)) {
-                    $inst_parent->setPath('extension_root', JPATH_ROOT . DS . 'plugins' . DS . $pgroup . DS . $pname);
+                    $inst_parent->setPath('extension_root', JPATH_ROOT . DIRECTORY_SEPARATOR . 'plugins' . DIRECTORY_SEPARATOR . $pgroup . DIRECTORY_SEPARATOR . $pname);
                 } else {
                     $inst_parent->abort(JText::_('Plugin') . ' ' . JText::_('Uninstall') . ': ' . JText::_('No plugin file specified'));
                     return false;

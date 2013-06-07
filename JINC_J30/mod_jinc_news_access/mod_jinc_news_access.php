@@ -18,7 +18,7 @@
  *   You should have received a copy of the GNU General Public License
  *   along with JINC.  If not, see <http://www.gnu.org/licenses/>.
  */
-require_once JPATH_ADMINISTRATOR . DS . 'components' . DS . 'com_jinc' . DS . 'classes' . DS . 'factory.php';
+require_once JPATH_ADMINISTRATOR . DIRECTORY_SEPARATOR . 'components' . DIRECTORY_SEPARATOR . 'com_jinc' . DIRECTORY_SEPARATOR . 'classes' . DIRECTORY_SEPARATOR . 'factory.php';
 jincimport('core.newsletter');
 
 $user = & JFactory::getUser();

@@ -46,7 +46,7 @@ class MessageTemplate extends JObject {
         jimport('joomla.filesystem.folder');
         jimport('joomla.filesystem.file');
 
-        $cssfile_abs = JPATH_COMPONENT_ADMINISTRATOR . DS . 'assets' . DS . 'templates' . DS . $this->cssfile;
+        $cssfile_abs = JPATH_COMPONENT_ADMINISTRATOR . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . $this->cssfile;
         return $cssfile_abs;
     }
 

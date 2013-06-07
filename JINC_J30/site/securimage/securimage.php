@@ -480,15 +480,15 @@ class Securimage {
 
         $this->code_length = 6;
         $this->charset = 'ABCDEFGHKLMNPRSTUVWYZabcdefghklmnprstuvwyz23456789';
-        $this->wordlist_file = JPATH_COMPONENT . DS . 'securimage' . DS . 'words/words.txt';
+        $this->wordlist_file = JPATH_COMPONENT . DIRECTORY_SEPARATOR . 'securimage' . DIRECTORY_SEPARATOR . 'words/words.txt';
         $this->use_wordlist = false;
 
-        $this->gd_font_file = JPATH_COMPONENT . DS . 'securimage' . DS . 'gdfonts/automatic.gdf';
+        $this->gd_font_file = JPATH_COMPONENT . DIRECTORY_SEPARATOR . 'securimage' . DIRECTORY_SEPARATOR . 'gdfonts/automatic.gdf';
         $this->use_gd_font = false;
         $this->gd_font_size = 24;
         $this->text_x_start = 15;
 
-        // $this->ttf_file = JPATH_COMPONENT . DS . 'securimage' . DS . 'AHGBold.ttf';
+        // $this->ttf_file = JPATH_COMPONENT . DIRECTORY_SEPARATOR . 'securimage' . DIRECTORY_SEPARATOR . 'AHGBold.ttf';
         $this->ttf_file = 'arial.ttf';
 
         $this->perturbation = 0.75;
@@ -514,14 +514,14 @@ class Securimage {
 
         $this->image_signature = '';
         $this->signature_color = new Securimage_Color(0x20, 0x50, 0xCC);
-        $this->signature_font = JPATH_COMPONENT . DS . 'securimage' . DS . 'AHGBold.ttf';
+        $this->signature_font = JPATH_COMPONENT . DIRECTORY_SEPARATOR . 'securimage' . DIRECTORY_SEPARATOR . 'AHGBold.ttf';
 
-        $this->audio_path = JPATH_COMPONENT . DS . 'securimage' . DS . 'audio/';
+        $this->audio_path = JPATH_COMPONENT . DIRECTORY_SEPARATOR . 'securimage' . DIRECTORY_SEPARATOR . 'audio/';
         $this->audio_format = 'mp3';
         $this->session_name = '';
         $this->expiry_time = 900;
 
-        $this->sqlite_database = JPATH_COMPONENT . DS . 'securimage' . DS . 'database/securimage.sqlite';
+        $this->sqlite_database = JPATH_COMPONENT . DIRECTORY_SEPARATOR . 'securimage' . DIRECTORY_SEPARATOR . 'database/securimage.sqlite';
         $this->use_sqlite_db = false;
 
         $this->sqlite_handle = false;

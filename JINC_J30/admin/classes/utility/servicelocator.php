@@ -51,8 +51,8 @@ class ServiceLocator {
         jimport('joomla.filesystem.folder');
         jimport('joomla.filesystem.file');
 
-        $path_abs_root = JPATH_ADMINISTRATOR . DS . 'components' . DS;
-        $path_rel = 'com_jinc' . DS . 'jinc.log';
+        $path_abs_root = JPATH_ADMINISTRATOR . DIRECTORY_SEPARATOR . 'components' . DIRECTORY_SEPARATOR;
+        $path_rel = 'com_jinc' . DIRECTORY_SEPARATOR . 'jinc.log';
         $logger = new Logger(ParameterProvider::getLogLevel());
         $loghandler = new FileLogger($path_abs_root . $path_rel);
         $logger->addHandler($loghandler);

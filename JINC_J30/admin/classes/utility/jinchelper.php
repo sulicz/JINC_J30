@@ -39,11 +39,11 @@ define('HELP_ONLINE_BASE', 'http://lhacky.altervista.org/jextensions/');
 class JINCHelper {
 
     function _getXMLInfos($info) {
-        $folder = JPATH_ADMINISTRATOR . DS . 'components' . DS . 'com_jinc';
+        $folder = JPATH_ADMINISTRATOR . DIRECTORY_SEPARATOR . 'components' . DIRECTORY_SEPARATOR . 'com_jinc';
         if (JFolder::exists($folder)) {
             $xmlFilesInDir = JFolder::files($folder, 'com_jinc.xml');
         } else {
-            $folder = JPATH_SITE . DS . 'components' . DS . 'com_jinc';
+            $folder = JPATH_SITE . DIRECTORY_SEPARATOR . 'components' . DIRECTORY_SEPARATOR . 'com_jinc';
             if (JFolder::exists($folder)) {
                 $xmlFilesInDir = JFolder::files($folder, 'com_jinc.xml');
             } else {
@@ -54,7 +54,7 @@ class JINCHelper {
         $xml_items = '';
         if (count($xmlFilesInDir)) {
             foreach ($xmlFilesInDir as $xmlfile) {
-                if ($data = JApplicationHelper::parseXMLInstallFile($folder . DS . $xmlfile)) {
+                if ($data = JApplicationHelper::parseXMLInstallFile($folder . DIRECTORY_SEPARATOR . $xmlfile)) {
                     foreach ($data as $key => $value) {
                         $xml_items[$key] = $value;
                     }

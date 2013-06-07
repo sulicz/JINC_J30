@@ -239,7 +239,7 @@ class JINCModelAttributes extends JModelAdmin {
         $xmlstring .= '   </fields>';
         $xmlstring .= '</form>';
 
-        $filename = JPATH_COMPONENT_ADMINISTRATOR . DS . 'models' . DS . 'forms' . DS . 'attributes.xml';
+        $filename = JPATH_COMPONENT_ADMINISTRATOR . DIRECTORY_SEPARATOR . 'models' . DIRECTORY_SEPARATOR . 'forms' . DIRECTORY_SEPARATOR . 'attributes.xml';
         if ($fh = fopen($filename, 'w+')) {
             $logger->debug('Recreating file ' . $filename);
             fwrite($fh, $xmlstring);

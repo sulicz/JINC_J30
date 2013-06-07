@@ -81,7 +81,7 @@ class JINCModelTemplate extends JModelAdmin {
 
         $item = parent::getItem($pk);       
         if (strlen($item->cssfile) > 0) {
-            $item->cssfile_abs = JPATH_COMPONENT_ADMINISTRATOR . DS . 'assets' . DS . 'templates' . DS . $item->cssfile;
+            $item->cssfile_abs = JPATH_COMPONENT_ADMINISTRATOR . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . $item->cssfile;
             $logger->debug('JINCModelTemplate - Reading CSS file ' . $item->cssfile_abs);
 
             $item->cssfile_content = is_readable($item->cssfile_abs)?file_get_contents($item->cssfile_abs):false;            

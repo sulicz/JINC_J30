@@ -24,8 +24,8 @@ defined('_JEXEC') or die('Restricted access');
 jimport('joomla.filesystem.file');
 jimport('joomla.application.component.controller');
 
-require_once JPATH_ADMINISTRATOR . DS . 'components' . DS . 'com_jinc' . DS . 'classes' . DS . 'factory.php';
-require_once( JPATH_COMPONENT . DS . 'controller.php' );
+require_once JPATH_ADMINISTRATOR . DIRECTORY_SEPARATOR . 'components' . DIRECTORY_SEPARATOR . 'com_jinc' . DIRECTORY_SEPARATOR . 'classes' . DIRECTORY_SEPARATOR . 'factory.php';
+require_once( JPATH_COMPONENT . DIRECTORY_SEPARATOR . 'controller.php' );
 
 $controller = JController::getInstance('Newsletters');
 $controller->execute(JRequest::getCmd('task'));

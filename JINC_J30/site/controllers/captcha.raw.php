@@ -21,7 +21,7 @@ defined('_JEXEC') or die();
 
 class NewslettersControllerCaptcha extends NewslettersController {
     public function showCaptcha () {
-        include JPATH_COMPONENT . DS . 'securimage' . DS . 'securimage.php';
+        include JPATH_COMPONENT . DIRECTORY_SEPARATOR . 'securimage' . DIRECTORY_SEPARATOR . 'securimage.php';
 
         $img = new securimage();
 

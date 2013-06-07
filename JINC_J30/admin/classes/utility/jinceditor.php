@@ -46,8 +46,8 @@ class JINCEditor {
             return;
         $app = JFactory::getApplication();
         $cssurl = rtrim(JURI::root(), '/') . '/' . 'administrator/index.php?option=com_jinc&task=templatecss.loadcss&format=css&id=' . $id . '&time=' . time();
-        $filepath = JPATH_COMPONENT_ADMINISTRATOR . DS . 'assets' . DS . 'templates' . DS . $id . '.css';
-        $filepath = str_replace('/', DS, $filepath);
+        $filepath = JPATH_COMPONENT_ADMINISTRATOR . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . $id . '.css';
+        $filepath = str_replace('/', DIRECTORY_SEPARATOR, $filepath);
         $name = $this->myEditor->get('_name');
         if ($name == 'tinymce') {
             $this->editorConfig = array('content_css_custom' => $cssurl, 'content_css' => '0');
@@ -58,7 +58,7 @@ class JINCEditor {
             $this->editorConfig = array('custom_css_url' => $cssurl, 'custom_css_file' => $fileurl, 'custom_css_path' => $filepath);
             JRequest::setVar('jinc_cssfile', $fileurl);
             if ($name == 'jce') {
-                $jcepath = JPATH_ROOT . DS . 'administrator' . DS . 'components' . DS . 'com_jce' . DS . 'models' . DS;
+                $jcepath = JPATH_ROOT . DIRECTORY_SEPARATOR . 'administrator' . DIRECTORY_SEPARATOR . 'components' . DIRECTORY_SEPARATOR . 'com_jce' . DIRECTORY_SEPARATOR . 'models' . DIRECTORY_SEPARATOR;
                 if (file_exists($jcepath . 'editor.php')) {
                     jimport('joomla.filesystem.file');
                     $content = JFile::read($jcepath . 'editor.php');

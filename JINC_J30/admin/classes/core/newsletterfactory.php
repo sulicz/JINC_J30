@@ -190,7 +190,7 @@ class NewsletterFactory {
 
         $themes = array();
 
-        $directory = JPATH_SITE . DS . 'components' . DS . 'com_jinc' . DS . 'assets' . DS . 'themes';
+        $directory = JPATH_SITE . DIRECTORY_SEPARATOR . 'components' . DIRECTORY_SEPARATOR . 'com_jinc' . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . 'themes';
         $handler = opendir($directory);
         while ($file = readdir($handler)) {
             if (strtolower(substr($file, -4)) == '.css') {

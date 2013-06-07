@@ -20,9 +20,9 @@
 defined( '_JEXEC' ) or die( 'Restricted access' );
 // Preload the JINCFactory
 jimport('joomla.filesystem.file');
-require_once JPATH_COMPONENT_ADMINISTRATOR.DS.'classes'.DS.'factory.php';
+require_once JPATH_COMPONENT_ADMINISTRATOR.DIRECTORY_SEPARATOR.'classes'.DIRECTORY_SEPARATOR.'factory.php';
 
-require_once( JPATH_COMPONENT.DS.'controller.php' );
+require_once( JPATH_COMPONENT.DIRECTORY_SEPARATOR.'controller.php' );
 
 // Access check.
 if (!JFactory::getUser()->authorise('core.manage', 'com_jinc')) {
