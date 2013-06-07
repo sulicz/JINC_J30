@@ -33,7 +33,7 @@ $lang = JFactory::getLanguage();
 $lang->load('com_jinc', JPATH_ROOT);
 
 jimport('joomla.application.component.controller');
-$controller	= JController::getInstance('JINC');
+$controller	= JControllerLegacy::getInstance('JINC');
 $controller->execute(JRequest::getCmd('task'));
 $controller->redirect();
 ?>

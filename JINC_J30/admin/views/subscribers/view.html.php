@@ -22,7 +22,7 @@ jimport( 'joomla.application.component.view' );
 require_once JPATH_COMPONENT . '/models/fields/jincnewsletter.php';
 require_once JPATH_COMPONENT . '/models/fields/jincsubstate.php';
 
-class JINCViewSubscribers extends JView {
+class JINCViewSubscribers extends JViewLegacy {
     protected $items;
     protected $pagination;
     protected $state;

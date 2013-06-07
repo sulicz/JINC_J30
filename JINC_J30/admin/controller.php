@@ -34,7 +34,7 @@ if (($view == 'newsletters') || ($view == 'messages') || ($view == 'subscribers'
 	JSubMenuHelper::addEntry(JText::_('COM_JINC_MENU_TOOLS'), 'index.php?option=com_jinc&view=tools', $view == 'tools' );
 }
 
-class JINCController extends JController {
+class JINCController extends JControllerLegacy {
     function display() {
         parent::display();
     }

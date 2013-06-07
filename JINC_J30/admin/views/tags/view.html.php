@@ -20,7 +20,7 @@
 defined('_JEXEC') or die();
 jimport( 'joomla.application.component.view' );
 
-class JINCViewTags extends JView {
+class JINCViewTags extends JViewLegacy {
     protected $items;
     
     function display($tpl = null) {

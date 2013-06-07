@@ -22,7 +22,7 @@ defined('_JEXEC') or die();
 
 jimport('joomla.application.component.controllerform');
 
-class JINCControllerMessageJSON extends JController {
+class JINCControllerMessageJSON extends JControllerLegacy {
 
     function __construct() {
         parent::__construct();

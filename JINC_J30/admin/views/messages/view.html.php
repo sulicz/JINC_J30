@@ -22,7 +22,7 @@ defined('_JEXEC') or die();
 jimport('joomla.application.component.view');
 require_once JPATH_COMPONENT . '/models/fields/jincnewsletter.php';
 
-class JINCViewMessages extends JView {
+class JINCViewMessages extends JViewLegacy {
 
     protected $items;
     protected $pagination;

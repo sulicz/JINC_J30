@@ -21,7 +21,7 @@
 defined('_JEXEC') or die('Restricted access');
 jimport('joomla.application.component.view');
 
-class NewslettersViewNewsletter extends JView {
+class NewslettersViewNewsletter extends JViewLegacy {
 
     protected $newsletter;
     protected $messages;

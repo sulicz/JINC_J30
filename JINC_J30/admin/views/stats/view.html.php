@@ -21,7 +21,7 @@ defined('_JEXEC') or die();
 jimport( 'joomla.application.component.view' );
 
 
-class JINCViewStats extends JView {
+class JINCViewStats extends JViewLegacy {
 
     protected $news_id;
     protected $stat_type;

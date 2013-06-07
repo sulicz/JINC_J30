@@ -21,7 +21,7 @@
 defined('_JEXEC') or die('Restricted access');
 jimport('joomla.application.component.controller');
 
-class NewslettersController extends JController {
+class NewslettersController extends JControllerLegacy {
 
     function __construct($config = array()) {
         parent::__construct($config);

@@ -20,7 +20,7 @@
 defined('_JEXEC') or die();
 jimport( 'joomla.application.component.view' );
 
-class JINCViewTemplates extends JView {
+class JINCViewTemplates extends JViewLegacy {
     protected $items;
     protected $pagination;
     protected $state;

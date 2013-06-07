@@ -20,7 +20,7 @@
 defined('_JEXEC') or die();
 jimport( 'joomla.application.component.view' );
 
-class JINCViewAttributes extends JView {
+class JINCViewAttributes extends JViewLegacy {
     protected $items;
     protected $form;
     

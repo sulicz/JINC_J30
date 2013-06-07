@@ -21,7 +21,7 @@
 defined('_JEXEC') or die('Restricted access');
 jimport('joomla.application.component.view');
 
-class NewslettersViewGateway extends JView {
+class NewslettersViewGateway extends JViewLegacy {
     protected $newsletter;
     
     function display($tpl = null) {

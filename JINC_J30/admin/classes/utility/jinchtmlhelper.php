@@ -32,8 +32,8 @@ class JINCHTMLHelper {
         $button = '<div style="float:left;">';
         $button .=	'<div class="icon">'
             .'<a href="'.$link.'" ' . $attribs . '>'
-            .JHTML::_('image.site',  $image, '/components/com_jinc/assets/images/icons/', NULL, NULL, $text )
-            .'<span>'.$text.'</span></a>'
+            .'<img src="components/com_jinc/assets/images/icons/' . $image . '" ' . 'alt="' . $text . '"/>'            
+            .'<div>'.$text.'</div></a>'
             .'</div>';
         $button .= '</div>';
 

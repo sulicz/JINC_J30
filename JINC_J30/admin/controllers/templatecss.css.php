@@ -21,7 +21,7 @@
 defined('_JEXEC') or die();
 jimport('joomla.application.component.controllerform');
 
-class JINCControllerTemplateCSS extends JController {
+class JINCControllerTemplateCSS extends JControllerLegacy {
 
     function __construct() {
         parent::__construct();

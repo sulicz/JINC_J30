@@ -21,7 +21,7 @@
 defined('_JEXEC') or die();
 jimport('joomla.application.component.view');
 
-class JINCViewSubscriber extends JView {
+class JINCViewSubscriber extends JViewLegacy {
     protected $info;
 
     public function display($tpl = null) {

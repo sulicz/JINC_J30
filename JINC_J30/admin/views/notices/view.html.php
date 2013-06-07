@@ -20,7 +20,7 @@
 defined('_JEXEC') or die();
 jimport( 'joomla.application.component.view' );
 
-class JINCViewNotices extends JView {
+class JINCViewNotices extends JViewLegacy {
     protected $items;
     protected $pagination;
     protected $state;

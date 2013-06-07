@@ -20,7 +20,7 @@
 defined('_JEXEC') or die();
 jimport( 'joomla.application.component.view' );
 
-class JINCViewTools extends JView {
+class JINCViewTools extends JViewLegacy {
     function display($tpl = null) {
         JHTML::stylesheet('administrator/components/com_jinc/assets/css/jinc_admin.css');
         JToolBarHelper::title( JText::_('COM_JINC_TOOLS'), 'jinc' );

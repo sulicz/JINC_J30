@@ -21,7 +21,7 @@
 defined('_JEXEC') or die();
 jimport('joomla.application.component.view');
 
-class JINCViewMessage extends JView {
+class JINCViewMessage extends JViewLegacy {
 
     protected $state;
     protected $item;

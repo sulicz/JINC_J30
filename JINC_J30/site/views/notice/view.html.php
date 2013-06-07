@@ -20,7 +20,7 @@
 defined( '_JEXEC' ) or die( 'Restricted access' );
 jimport( 'joomla.application.component.view');
 
-class NewslettersViewNotice extends JView {
+class NewslettersViewNotice extends JViewLegacy {
     protected $notice;
 
     function display($tpl = null) {
