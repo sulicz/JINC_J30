@@ -91,6 +91,7 @@ $listDirn = $this->state->get('list.direction');
                 </tr>
             </thead>
             <?php
+                        $k = 0;
                         $options = array("height" => 16, "width" => 16);
                         $base_url = JURI::base() . 'components/com_jinc/assets/images/';
                         $public_img = JHTML::image($base_url . 'send_f2.png',
@@ -100,10 +101,9 @@ $listDirn = $this->state->get('list.direction');
                         $import_img = JHTML::image($base_url . 'upload_f2.png',
                                         JText::_('COM_JINC_LEGEND_IMPORT'), $options);
                         $stats_img = JHTML::image($base_url . 'cpanel.png',
-                                        JText::_('COM_JINC_LEGEND_STATS'), $options);
-                        $k = 0;
+                                        JText::_('COM_JINC_LEGEND_STATS'), $options);                        
                         for ($i = 0, $n = count($this->items); $i < $n; $i++) {
-                            $row = & $this->items[$i];
+                            $row = & $this->items[$i];                                                        
                             $checked = JHTML::_('grid.id', $i, $row->id);
                             $link = JRoute::_('index.php?option=com_jinc&view=newsletter&task=newsletter.edit&id=' . $row->id);
                             $import_link = JRoute::_('index.php?option=com_jinc&view=newsletter&layout=uploadcsv&id=' . $row->id);

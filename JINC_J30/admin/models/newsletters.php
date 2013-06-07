@@ -63,14 +63,14 @@ class JINCModelNewsletters extends JModelList {
 
         $search = $this->getState('filter.search');
         if (!empty($search)) {
-            $search = $db->Quote('%' . $db->getEscaped($search, true) . '%');
+            $search = $db->Quote('%' . $db->escape($search, true) . '%');
             $query->where('name LIKE ' . $search);
         }
 
         // Add the list ordering clause.
-        $orderCol = $this->state->get('list.ordering');
-        $orderDirn = $this->state->get('list.direction');
-        $query->order($db->getEscaped($orderCol . ' ' . $orderDirn));
+        $orderCol = $this->getState('list.ordering');
+        $orderDirn = $this->getState('list.direction');        
+        $query->order($db->escape($orderCol.' '.$orderDirn));        
         return $query;
     }
 

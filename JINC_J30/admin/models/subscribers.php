@@ -75,7 +75,7 @@ class JINCModelSubscribers extends JModelList {
 
         $search = $this->getState('filter.search');
         if (!empty($search)) {
-            $search = $db->Quote('%' . $db->getEscaped($search, true) . '%');
+            $search = $db->Quote('%' . $db->escape($search, true) . '%');
             $query->where('u.email LIKE ' . $search . ' OR s.email LIKE ' . $search);
         }
         $search = $this->getState('filter.sub_state');
@@ -87,7 +87,7 @@ class JINCModelSubscribers extends JModelList {
         // Add the list ordering clause.
         $orderCol = $this->state->get('list.ordering');
         $orderDirn = $this->state->get('list.direction');
-        $query->order($db->getEscaped($orderCol . ' ' . $orderDirn));
+        $query->order($db->escape($orderCol . ' ' . $orderDirn));
         return $query;
     }
 

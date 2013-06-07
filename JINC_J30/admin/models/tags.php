@@ -21,7 +21,7 @@
 defined('_JEXEC') or die();
 jimport('joomla.application.component.model');
 
-class JINCModelTags extends JModel {
+class JINCModelTags extends JModelLegacy {
 
     function __construct() {
         parent::__construct();

@@ -23,7 +23,7 @@ jimport('joomla.application.component.model');
 
 JTable::addIncludePath(JPATH_ADMINISTRATOR . DIRECTORY_SEPARATOR . 'components' . DIRECTORY_SEPARATOR . 'com_jinc' . DIRECTORY_SEPARATOR . 'tables');
 
-class JINCModelTools extends JModel {
+class JINCModelTools extends JModelLegacy {
 
     function __construct() {
         parent::__construct();
@@ -110,7 +110,7 @@ class JINCModelTools extends JModel {
     function loadTemplate() {
         $template = & JTable::getInstance('template', 'Table');
         $date = JFactory::getDate();
-        $now = $date->toMySQL();
+        $now = $date->toSQL();
         $data = array();
         $data['name'] = 'Red Template';
         $data['subject'] = 'Message from [NEWSLETTER]';
@@ -165,7 +165,7 @@ td {padding: 15px; border-top:1px solid #e0e0e0; border-right:1px solid #e0e0e0;
         $news_private = & JTable::getInstance('newsletter', 'Table');
 
         $date = JFactory::getDate();
-        $now = $date->toMySQL();
+        $now = $date->toSQL();
         $data = array();
         $data['type'] = 2;
         $data['name'] = 'Private news for elected people';
@@ -200,7 +200,7 @@ td {padding: 15px; border-top:1px solid #e0e0e0; border-right:1px solid #e0e0e0;
         $news_public = & JTable::getInstance('newsletter', 'Table');
 
         $date = JFactory::getDate();
-        $now = $date->toMySQL();
+        $now = $date->toSQL();
         $data = array();
         $data['type'] = 0;
         $data['name'] = 'News for everyone!!';
@@ -273,7 +273,7 @@ td {padding: 15px; border-top:1px solid #e0e0e0; border-right:1px solid #e0e0e0;
             for ($j = 0; $j < $num; $j++) {
                 $d = new JDate($now->toUNIX() - $i * 24 * 60 * 60 + rand(0, 24 * 60) * 60);
                 $query = "INSERT INTO #__jinc_stats_event (type, date, news_id) " .
-                        "VALUES (0, '" . $d->toMySQL() . "', $news_private_id)";
+                        "VALUES (0, '" . $d->toSQL() . "', $news_private_id)";
                 $dbo->setQuery($query);
                 if (!$dbo->query()) {
                     $this->setError($dbo->getErrorMsg() . ': ' . $query);
@@ -284,7 +284,7 @@ td {padding: 15px; border-top:1px solid #e0e0e0; border-right:1px solid #e0e0e0;
             for ($j = 0; $j < $num; $j++) {
                 $d = new JDate($now->toUNIX() - $i * 24 * 60 * 60 + rand(0, 24 * 60) * 60);
                 $query = "INSERT INTO #__jinc_stats_event (type, date, news_id) " .
-                        "VALUES (1, '" . $d->toMySQL() . "', $news_private_id)";
+                        "VALUES (1, '" . $d->toSQL() . "', $news_private_id)";
                 $dbo->setQuery($query);
                 if (!$dbo->query()) {
                     $this->setError($dbo->getErrorMsg() . ': ' . $query);
@@ -296,7 +296,7 @@ td {padding: 15px; border-top:1px solid #e0e0e0; border-right:1px solid #e0e0e0;
             for ($j = 0; $j < $num; $j++) {
                 $d = new JDate($now->toUNIX() - $i * 24 * 60 * 60 + rand(0, 24 * 60) * 60);
                 $query = "INSERT INTO #__jinc_stats_event (type, date, news_id) " .
-                        "VALUES (0, '" . $d->toMySQL() . "', $news_public_id)";
+                        "VALUES (0, '" . $d->toSQL() . "', $news_public_id)";
                 $dbo->setQuery($query);
                 if (!$dbo->query()) {
                     $this->setError($dbo->getErrorMsg() . ': ' . $query);
@@ -307,7 +307,7 @@ td {padding: 15px; border-top:1px solid #e0e0e0; border-right:1px solid #e0e0e0;
             for ($j = 0; $j < $num; $j++) {
                 $d = new JDate($now->toUNIX() - $i * 24 * 60 * 60 + rand(0, 24 * 60) * 60);
                 $query = "INSERT INTO #__jinc_stats_event (type, date, news_id) " .
-                        "VALUES (1, '" . $d->toMySQL() . "', $news_public_id)";
+                        "VALUES (1, '" . $d->toSQL() . "', $news_public_id)";
                 $dbo->setQuery($query);
                 if (!$dbo->query()) {
                     $this->setError($dbo->getErrorMsg() . ': 

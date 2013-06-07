@@ -122,7 +122,7 @@ class JINCModelNewsletter extends JModelAdmin {
         if ($item = parent::getItem($pk)) {
             // Convert the params field to an array.
             $registry = new JRegistry;
-            $registry->loadJSON($item->attribs);
+            $registry->loadString($item->attribs);
             $item->attribs = $registry->toArray();
             // Setting default values for optins
             if ($item->id == 0) {

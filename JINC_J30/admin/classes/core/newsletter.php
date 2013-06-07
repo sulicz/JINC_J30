@@ -483,8 +483,8 @@ class Newsletter extends JINCObject {
         $dbo = & JFactory::getDBO();
         $news_id = $this->get('id');
         foreach ($attributes as $attr_name => $attr_value) {
-            $attr_name_db = $dbo->getEscaped($attr_name);
-            $attr_value_db = $dbo->quote($dbo->getEscaped($attr_value), false);
+            $attr_name_db = $dbo->escape($attr_name);
+            $attr_value_db = $dbo->quote($dbo->escape($attr_value), false);
             $query = 'INSERT IGNORE INTO `#__jinc_attribute_' . $attr_name_db . '` ' .
                     '(news_id, id, value) ' .
                     'VALUES (' . (int) $news_id . ', ' . (int) $sub_id . ', ' . $attr_value_db . ')';
@@ -529,7 +529,7 @@ class Newsletter extends JINCObject {
         $ninstance = NewsletterFactory::getInstance();
         $attributes = $ninstance->loadAttributesList();
         foreach ($attributes as $attribute) {
-            $attr_name_db = $dbo->getEscaped($attribute['name']);
+            $attr_name_db = $dbo->escape($attribute['name']);
             $query = 'DELETE FROM `#__jinc_attribute_' . $attr_name_db . '` ' .
                     'WHERE news_id = ' . (int) $news_id . ' AND id = ' . (int) $sub_id;
             $logger->debug('PublicNewsletter: Executing query: ' . $query);

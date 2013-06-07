@@ -22,7 +22,7 @@ defined('_JEXEC') or die();
 jimport('joomla.application.component.model');
 jimport('joomla.html.pagination');
 
-class NewslettersModelNewsletter extends JModel {
+class NewslettersModelNewsletter extends JModelLegacy {
 
     function getMessages() {
         jincimport('utility.servicelocator');

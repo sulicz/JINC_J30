@@ -21,7 +21,7 @@ defined('_JEXEC') or die();
 jimport('joomla.application.component.model');
 jimport('joomla.html.pagination');
 
-class NewslettersModelMessage extends JModel {
+class NewslettersModelMessage extends JModelLegacy {
 
     function __construct() {
         parent::__construct();

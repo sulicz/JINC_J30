@@ -99,11 +99,11 @@ class JINCModelAttributes extends JModelAdmin {
         }
 
         $dbo = & JFactory::getDBO();
-        $attr_name_db = $dbo->getEscaped($attr_name);
-        $attr_description_db = $dbo->quote($dbo->getEscaped($attr_description), false);
-        $attr_name_i18n_db = $dbo->quote($dbo->getEscaped($attr_name_i18n), false);
+        $attr_name_db = $dbo->escape($attr_name);
+        $attr_description_db = $dbo->quote($dbo->escape($attr_description), false);
+        $attr_name_i18n_db = $dbo->quote($dbo->escape($attr_name_i18n), false);
 
-        $attr_name_db_table = $dbo->getEscaped('' . $attr_name);
+        $attr_name_db_table = $dbo->escape('' . $attr_name);
 
         $query = 'CREATE TABLE IF NOT EXISTS `#__jinc_attribute_' . $attr_name_db . '` (' .
                 '`news_id` int(10) unsigned NOT NULL, ' .
@@ -162,7 +162,7 @@ class JINCModelAttributes extends JModelAdmin {
         }
 
         $dbo = & JFactory::getDBO();
-        $attr_name_db = $dbo->getEscaped($attr_name);
+        $attr_name_db = $dbo->escape($attr_name);
 
         $query = 'SELECT name FROM #__jinc_newsletter ' .
                 'WHERE attribs LIKE  ' . $dbo->quote('%' . $attr_name_db . '%', false);
