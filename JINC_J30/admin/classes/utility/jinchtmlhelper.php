@@ -30,7 +30,7 @@
 class JINCHTMLHelper {
     function quickIconButton( $link, $image, $text, $attribs = "" ) {
         $button = '<div style="float:left;">';
-        $button .=	'<div class="icon">'
+        $button .=	'<div class="jinc_thumbcell">'
             .'<a href="'.$link.'" ' . $attribs . '>'
             .'<img src="components/com_jinc/assets/images/icons/' . $image . '" ' . 'alt="' . $text . '"/>'            
             .'<div>'.$text.'</div></a>'
