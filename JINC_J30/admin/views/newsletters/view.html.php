@@ -22,6 +22,7 @@ defined('_JEXEC') or die();
 jimport('joomla.application.component.view');
 
 class JINCViewNewsletters extends JViewLegacy {
+
     protected $items;
     protected $pagination;
     protected $state;
@@ -53,6 +54,26 @@ class JINCViewNewsletters extends JViewLegacy {
         JINCHelper::helpOnLine(88);
     }
 
+    /**
+     * Returns an array of fields the table can be sorted by
+     *
+     * @return  array  Array containing the field name to sort by as the key and display text as value
+     *
+     * @since   3.0
+     */
+    protected function getSortFields() {
+        return array(
+            'a.ordering' => JText::_('JGRID_HEADING_ORDERING'),
+            'a.state' => JText::_('JSTATUS'),
+            'a.title' => JText::_('JGLOBAL_TITLE'),
+            'category_title' => JText::_('JCATEGORY'),
+            'access_level' => JText::_('JGRID_HEADING_ACCESS'),
+            'a.created_by' => JText::_('JAUTHOR'),
+            'language' => JText::_('JGRID_HEADING_LANGUAGE'),
+            'a.created' => JText::_('JDATE'),
+            'a.id' => JText::_('JGRID_HEADING_ID')
+        );
+    }
 }
 
 ?>
