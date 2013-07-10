@@ -19,7 +19,7 @@
                 <option value="4">COM_JINC_CONFIG_WARNING</option>
                 <option value="5">COM_JINC_CONFIG_SEVERE</option>
             </field>
-            <field name="hints" type="radio" default="1" label="COM_JINC_CONFIG_HINTS_ONOFF" description="COM_JINC_CONFIG_HINTS_ONOFF_DESC">
+            <field name="hints" type="radio" default="0" label="COM_JINC_CONFIG_HINTS_ONOFF" description="COM_JINC_CONFIG_HINTS_ONOFF_DESC">
                 <option value="1">YES</option>
                 <option value="0">NO</option>
             </field>

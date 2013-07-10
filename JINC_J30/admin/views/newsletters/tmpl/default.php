@@ -19,21 +19,23 @@
  */
 defined('_JEXEC') or die('Restricted access');
 
-JHtml::addIncludePath(JPATH_COMPONENT.'/helpers/html');
+JHtml::addIncludePath(JPATH_COMPONENT . '/helpers/html');
 JHtml::_('bootstrap.tooltip');
 JHtml::_('behavior.multiselect');
 JHtml::_('dropdown.init');
 JHtml::_('formbehavior.chosen', 'select');
 
+$user = JFactory::getUser();
 isset($this->items) or die('Items not defined');
 jincimport('utility.jinchtmlhelper');
+jincimport('frontend.jhtmljincdropdown');
 jincimport('core.newsletter');
-// JINCHTMLHelper::hint('NEWSLETTER_LIST', 'NEWSLETTER_LIST_TITLE');
+JINCHTMLHelper::hint('NEWSLETTER_LIST', 'NEWSLETTER_LIST_TITLE');
 $listOrder = $this->escape($this->state->get('list.ordering'));
 $listDirn = $this->escape($this->state->get('list.direction'));
+$userId = $user->get('id');
 
 $sortFields = $this->getSortFields();
-$assoc = isset($app->item_associations) ? $app->item_associations : 0;
 ?>
 <script type="text/javascript">
     Joomla.orderTable = function()
@@ -57,8 +59,8 @@ $assoc = isset($app->item_associations) ? $app->item_associations : 0;
     <div id="j-main-container">
         <div id="filter-bar" class="btn-toolbar">
             <div class="filter-search btn-group pull-left">
-                <label for="filter_search" class="element-invisible"><?php echo JText::_('COM_CONTENT_FILTER_SEARCH_DESC'); ?></label>
-                <input type="text" name="filter_search" placeholder="<?php echo JText::_('COM_CONTENT_FILTER_SEARCH_DESC'); ?>" id="filter_search" value="<?php echo $this->escape($this->state->get('filter.search')); ?>" title="<?php echo JText::_('COM_CONTENT_FILTER_SEARCH_DESC'); ?>" />
+                <label for="filter_search" class="element-invisible"><?php echo JText::_('COM_JINC_FILTER_SEARCH_DESC'); ?></label>
+                <input type="text" name="filter_search" placeholder="<?php echo JText::_('COM_JINC_FILTER_SEARCH_DESC'); ?>" id="filter_search" value="<?php echo $this->escape($this->state->get('filter.search')); ?>" title="<?php echo JText::_('COM_CONTENT_FILTER_SEARCH_DESC'); ?>" />
             </div>
             <div class="btn-group pull-left hidden-phone">
                 <button class="btn tip hasTooltip" type="submit" title="<?php echo JText::_('JSEARCH_FILTER_SUBMIT'); ?>"><i class="icon-search"></i></button>
@@ -89,146 +91,108 @@ $assoc = isset($app->item_associations) ? $app->item_associations : 0;
     </div>
     <div class="clearfix"> </div>
 
-    <div id="editcell">
-        <table class="adminlist">
-            <thead>
-                <tr>
-                    <th width="2%">
-                        <input type="checkbox" name="toggle" value="" onclick="checkAll(<?php echo count($this->items); ?>);" />
-                    </th>
-                    <th width="32%">
-                        <?php
-                        echo JHTML::_('grid.sort', 'COM_JINC_LIST_NEWS_NAME', 'name', $listDirn, $listOrder);
-                        ?>
-                    </th>
-                    <th width="2%">
-                        <?php
-                        echo JHTML::_('grid.sort', 'COM_JINC_LIST_PUBLISHED', 'published', $listDirn, $listOrder);
-                        ?>
-                    </th>
-                    <th width="2%">
-                        <?php
-                        echo JHTML::_('grid.sort', 'COM_JINC_LIST_TYPE', 'type', $listDirn, $listOrder);
-                        ?>
-                    </th>
-                    <th width="3%">
-                        <?php echo JText::_('COM_JINC_LEGEND_IMPORT'); ?>
-                    </th>
-                    <th width="3%">
-                        <?php echo JText::_('COM_JINC_LEGEND_STATS'); ?>
-                    </th>
-                    <th width="17%">
-                        <?php
-                        echo JHTML::_('grid.sort', 'COM_JINC_LIST_CREATED', 'created', $listDirn, $listOrder);
-                        ?>
-                    </th>
-                    <th width="17%">
-                        <?php
-                        echo JHTML::_('grid.sort', 'COM_JINC_LIST_SENDER_ADDRESS', 'senderaddr', $listDirn, $listOrder);
-                        ?>
-                    </th>
-                    <th width="20%">
-                        <?php
-                        echo JHTML::_('grid.sort', 'COM_JINC_LIST_SENDER_NAME', 'sendername', $listDirn, $listOrder);
-                        ?>
-                    </th>
-                    <th width="2%">
-                        <?php
-                        echo JHTML::_('grid.sort', 'ID', 'id', $listDirn, $listOrder);
-                        ?>
-                    </th>
-                </tr>
-            </thead>
-            <?php
-            $k = 0;
-            $options = array("height" => 16, "width" => 16);
-            $base_url = JURI::base() . 'components/com_jinc/assets/images/';
-            $public_img = JHTML::image($base_url . 'send_f2.png', JText::_('COM_JINC_LEGEND_PUBLIC'), $options);
-            $private_img = JHTML::image($base_url . 'security_f2.png', JText::_('COM_JINC_LEGEND_PRIVATE'), $options);
-            $import_img = JHTML::image($base_url . 'upload_f2.png', JText::_('COM_JINC_LEGEND_IMPORT'), $options);
-            $stats_img = JHTML::image($base_url . 'cpanel.png', JText::_('COM_JINC_LEGEND_STATS'), $options);
-            for ($i = 0, $n = count($this->items); $i < $n; $i++) {
-                $row = & $this->items[$i];
-                $checked = JHTML::_('grid.id', $i, $row->id);
-                $link = JRoute::_('index.php?option=com_jinc&view=newsletter&task=newsletter.edit&id=' . $row->id);
-                $import_link = JRoute::_('index.php?option=com_jinc&view=newsletter&layout=uploadcsv&id=' . $row->id);
-                $stats_link = JRoute::_('index.php?option=com_jinc&task=newsletter.stats&id=' . $row->id);
-                $published = JHtml::_('jgrid.published', $row->published, $i, 'newsletters.', true);
-                ?>
-                <tr class="<?php echo "row$k"; ?>">
-                    <td>
-                        <?php echo $checked; ?>
-                    </td>
-                    <td>
-                        <a href="<?php echo $link; ?>"><?php echo $row->name; ?></a>
-                    </td>
-                    <td align="center">
-                        <?php echo $published; ?>
-                    </td>
-                    <td align="center">
-                        <?php
-                        $type = $row->type;
-                        if ($type == NEWSLETTER_PUBLIC_NEWS)
-                            echo $public_img;
-                        if ($type == NEWSLETTER_PRIVATE_NEWS)
-                            echo $private_img;
-                        ?>
-                    </td>
-                    <td align="center">
-                        <a href="<?php echo $import_link; ?>"><?php echo $import_img; ?></a>
-                    </td>
-                    <td align="center">
-                        <a href="<?php echo $stats_link; ?>"><?php echo $stats_img; ?></a>
-                    </td>
-                    <td>
-                        <?php
-                        $date = JFactory::getDate($row->created);
-                        echo $date;
-                        ?>
-                    </td>
-                    <td>
-                        <?php echo $row->senderaddr; ?>
-                    </td>
-                    <td>
-                        <?php echo $row->sendername; ?>
-                    </td>
-                    <td>
-                        <?php echo $row->id; ?>
-                    </td>
-                </tr>
-                <?php
-                $k = 1 - $k;
-            }
-            ?>
+    <table class="table table-striped" id="newsletterList">
+        <thead>
             <tr>
-                <td colspan="10">
-                    <?php echo $this->pagination->getListFooter(); ?>
-                </td>
+                <th width="1%" class="hidden-phone">
+                    <input type="checkbox" name="checkall-toggle" value="" title="<?php echo JText::_('JGLOBAL_CHECK_ALL'); ?>" onclick="Joomla.checkAll(this)" />
+                </th>
+                <th width="1%" style="min-width:55px" class="nowrap center">
+                    <?php echo JHtml::_('grid.sort', 'COM_JINC_STATUS', 'published', $listDirn, $listOrder); ?>
+                </th>
+                <th>
+                    <?php echo JHtml::_('grid.sort', 'COM_JINC_LIST_NEWS_NAME', 'name', $listDirn, $listOrder); ?>
+                </th>
+                <th width="1%" style="min-width:55px" class="nowrap center">
+                    <?php echo JHtml::_('grid.sort', 'COM_JINC_LIST_TYPE', 'type', $listDirn, $listOrder); ?>
+                </th>
+                <th width="10%" class="nowrap hidden-phone">
+                    <?php echo JHtml::_('grid.sort', 'COM_JINC_LIST_CREATED', 'created', $listDirn, $listOrder); ?>
+                </th>
+                <th width="10%" class="nowrap hidden-phone">
+                    <?php echo JHtml::_('grid.sort', 'COM_JINC_LIST_SENDER_ADDRESS', 'senderaddr', $listDirn, $listOrder); ?>
+                </th>
+                <th width="10%" class="nowrap hidden-phone">
+                    <?php echo JHtml::_('grid.sort', 'COM_JINC_LIST_SENDER_NAME', 'sendername', $listDirn, $listOrder); ?>
+                </th>
+                <th width="1%" class="nowrap hidden-phone">
+                    <?php echo JHtml::_('grid.sort', 'JGRID_HEADING_ID', 'id', $listDirn, $listOrder); ?>
+                </th>
             </tr>
+        </thead>    
+        <tbody>
+            <?php
+            $base_url = JURI::base() . 'components/com_jinc/assets/images/';
+            $public_img = JHTML::image($base_url . 'send_f2.png', JText::_('COM_JINC_LEGEND_PUBLIC'), array("height" => 16, "width" => 16));
+            $private_img = JHTML::image($base_url . 'security_f2.png', JText::_('COM_JINC_LEGEND_PRIVATE'), array("height" => 16, "width" => 16));
+            foreach ($this->items as $i => $item) :
+                $canCheckin = $user->authorise('core.manage', 'com_checkin') || $item->checked_out == $userId || $item->checked_out == 0;
+                $canChange = $user->authorise('core.edit.state', 'com_jinc.newsletter.' . $item->id) && $canCheckin;
+                $canEdit = $user->authorise('core.edit', 'com_jinc.newsletter.' . $item->id);
+                ?>
+                <tr class="row<?php echo $i % 2; ?>">
+                    <td class="center hidden-phone">
+                        <?php echo JHtml::_('grid.id', $i, $item->id); ?>
+                    </td>
+                    <td class="center">
+                        <div class="hidden-phone">
+                            <?php echo JHtml::_('jgrid.published', $item->published, $i, 'newsletters.', $canChange, 'cb', $item->published, 1 - $item->published); ?>
+                        </div>
+                    </td>
+                    <td class="nowrap has-context">
+                        <div class="pull-left">
+                            <?php if ($canEdit) : ?>
+                                <a href="<?php echo JRoute::_('index.php?option=com_jinc&task=newsletter.edit&id=' . $item->id); ?>" title="<?php echo JText::_('JACTION_EDIT'); ?>">
+                                    <?php echo $this->escape($item->name); ?></a>
+                            <?php else : ?>
+                                <span title="<?php echo JText::sprintf('COM_JINC_TITLE', $this->escape($item->name)); ?>"><?php echo $this->escape($item->name); ?></span>
+                            <?php endif; ?>
+                        </div>
 
-        </table>
+                        <div class="pull-left">
+                            <?php
+                            JHtml::_('jincdropdown.import', $item->id, 'newsletter');
+                            // JHtml::_('jincdropdown.stats', $item->id, 'newsletter.');
+                            echo JHtml::_('dropdown.render');
+                            ?>
+                        </div>
 
-        <?php
-        $legend_array = array();
-        array_push($legend_array, array('text' => 'COM_JINC_LEGEND_PUBLIC',
-            'icon' => 'send_f2.png'));
-        array_push($legend_array, array('text' => 'COM_JINC_LEGEND_PRIVATE',
-            'icon' => 'security_f2.png'));
-        array_push($legend_array, array('text' => 'COM_JINC_LEGEND_IMPORT',
-            'icon' => 'upload_f2.png'));
-        array_push($legend_array, array('text' => 'COM_JINC_LEGEND_STATS',
-            'icon' => 'cpanel.png'));
 
-        JINCHTMLHelper::legend($legend_array);
-        ?>
-    </div>
+                    </td>
+                    <td class="hidden-phone">
+                        <?php
+                        echo ($item->type == NEWSLETTER_PUBLIC_NEWS) ? $public_img : $private_img;
+                        ?>
+                    </td>
+                    <td class="small hidden-phone">
+                        <?php echo $this->escape(JFactory::getDate($item->created)); ?>
+                    </td>
+                    <td class="small hidden-phone">
+                        <?php echo $this->escape($item->senderaddr); ?>
+                    </td>
+                    <td class="small hidden-phone">
+                        <?php echo $this->escape($item->sendername); ?>
+                    </td>
+                    <td class="center hidden-phone">
+                        <?php echo (int) $item->id; ?>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+    <?php echo $this->pagination->getListFooter(); ?>
 
-    <input type="hidden" name="option" value="com_jinc" />
+    <?php
+    $legend_array = array();
+    array_push($legend_array, array('text' => 'COM_JINC_LEGEND_PUBLIC',
+        'icon' => 'send_f2.png'));
+    array_push($legend_array, array('text' => 'COM_JINC_LEGEND_PRIVATE',
+        'icon' => 'security_f2.png'));
+    JINCHTMLHelper::legend($legend_array);
+    ?>
     <input type="hidden" name="task" value="" />
     <input type="hidden" name="boxchecked" value="0" />
-    <input type="hidden" name="view" value="newsletters" />
     <input type="hidden" name="filter_order" value="<?php echo $listOrder; ?>" />
     <input type="hidden" name="filter_order_Dir" value="<?php echo $listDirn; ?>" />
     <?php echo JHtml::_('form.token'); ?>
-</div>
 </form>

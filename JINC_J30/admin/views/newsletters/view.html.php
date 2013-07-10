@@ -61,17 +61,16 @@ class JINCViewNewsletters extends JViewLegacy {
      *
      * @since   3.0
      */
-    protected function getSortFields() {
+    protected function getSortFields() {          
         return array(
-            'a.ordering' => JText::_('JGRID_HEADING_ORDERING'),
-            'a.state' => JText::_('JSTATUS'),
-            'a.title' => JText::_('JGLOBAL_TITLE'),
-            'category_title' => JText::_('JCATEGORY'),
-            'access_level' => JText::_('JGRID_HEADING_ACCESS'),
-            'a.created_by' => JText::_('JAUTHOR'),
-            'language' => JText::_('JGRID_HEADING_LANGUAGE'),
-            'a.created' => JText::_('JDATE'),
-            'a.id' => JText::_('JGRID_HEADING_ID')
+            'id' => JText::_('COM_JINC_ID'),
+            'name' => JText::_('COM_JINC_NAME'),
+            'published' => JText::_('COM_JINC_STATE'),
+            'lastsent' => JText::_('COM_JINC_LASTSENT'),
+            'created' => JText::_('COM_JINC_CREATIONDATE'),
+            'sendername' => JText::_('COM_JINC_SENDERNAME'),
+            'senderaddress' => JText::_('COM_JINC_SENDERADDR'),
+            'type' => JText::_('COM_JINC_TYPE'),            
         );
     }
 }

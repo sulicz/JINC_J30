@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright           Copyright (C) 2010 - Lhacky
  * @license		GNU/GPL http://www.gnu.org/licenses/gpl-2.0.html
@@ -18,9 +19,10 @@
  *   along with JINC.  If not, see <http://www.gnu.org/licenses/>.
  */
 defined('_JEXEC') or die();
-jimport( 'joomla.application.component.view' );
+jincimport('jhelper.jincview');
 
-class JINCViewTemplates extends JViewLegacy {
+class JINCViewTemplates extends JINCView {
+
     protected $items;
     protected $pagination;
     protected $state;
@@ -45,4 +47,20 @@ class JINCViewTemplates extends JViewLegacy {
         jincimport('utility.jinchelper');
         JINCHelper::helpOnLine(95);
     }
+
+    /**
+     * Returns an array of fields the table can be sorted by
+     *
+     * @return  array  Array containing the field name to sort by as the key and display text as value
+     *
+     * @since   3.0
+     */
+    protected function getSortFields() {
+        return array(
+            'id' => JText::_('COM_JINC_ID'),
+            'subject' => JText::_('COM_JINC_SUBJECT'),
+            'name' => JText::_('COM_JINC_NAME'),
+        );
+    }
+
 }

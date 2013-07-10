@@ -18,14 +18,19 @@
  *   along with JINC.  If not, see <http://www.gnu.org/licenses/>.
  */
 defined('_JEXEC') or die('Restricted access');
-?>
-<?php
 isset($this->items) or die('Items not defined');
-jincimport('utility.jinchtmlhelper');
-JINCHTMLHelper::hint('TEMPLATE_LIST', 'TEMPLATE_LIST_TITLE');
+
+$user = JFactory::getUser();
+$sortFields = $this->getSortFields();
 $listOrder = $this->state->get('list.ordering');
 $listDirn = $this->state->get('list.direction');
+
+jincimport('utility.jinchtmlhelper');
+jincimport('utility.jincjoomlahelper');
+
+JINCJoomlaHelper::tmplListInit($listOrder, 'TEMPLATE_LIST');
 ?>
+
 <form action="<?php echo JRoute::_('index.php?option=com_jinc&view=templates'); ?>" method="post" name="adminForm" id="adminForm">
     <fieldset id="filter-bar">
         <div class="filter-search fltlft">

@@ -19,10 +19,10 @@
  *   along with JINC.  If not, see <http://www.gnu.org/licenses/>.
  */
 defined('_JEXEC') or die();
-jimport('joomla.application.component.view');
+jincimport('jhelper.jincview');
 require_once JPATH_COMPONENT . '/models/fields/jincnewsletter.php';
 
-class JINCViewMessages extends JViewLegacy {
+class JINCViewMessages extends JINCView {
 
     protected $items;
     protected $pagination;
@@ -54,6 +54,24 @@ class JINCViewMessages extends JViewLegacy {
         JToolBarHelper::deleteList(JText::_('COM_JINC_WARNING_DELETE_ITEMS'), 'messages.delete');
         jincimport('utility.jinchelper');
         JINCHelper::helpOnLine(89);
+    }
+
+    /**
+     * Returns an array of fields the table can be sorted by
+     *
+     * @return  array  Array containing the field name to sort by as the key and display text as value
+     *
+     * @since   3.0
+     */
+    protected function getSortFields() {
+        return array(
+            'm.id' => JText::_('COM_JINC_ID'),
+            'm.subject' => JText::_('COM_JINC_SUBJECT'),
+            'm.bulkmail' => JText::_('COM_JINC_TYPE'),
+            'datasent' => JText::_('COM_JINC_LASTSENT'),
+            'n.name' => JText::_('COM_JINC_LIST_NEWS_NAME'),
+            'status' => JText::_('COM_JINC_STATUS'),
+        );
     }
 
 }

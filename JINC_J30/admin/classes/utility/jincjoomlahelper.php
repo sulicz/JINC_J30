@@ -28,18 +28,18 @@
  * @subpackage          Utility
  * @since		0.6
  */
-
 class JINCJoomlaHelper {
-/**
- * Joomla! user creator.
- *
- * @access	public
- * @param	string $username the username used for login.
- * @param	string $name the name of the user.
- * @param	string $email the user email.
- * @return      the new user identifier or false if something wrong.
- * @since	0.6
- */
+
+    /**
+     * Joomla! user creator.
+     *
+     * @access	public
+     * @param	string $username the username used for login.
+     * @param	string $name the name of the user.
+     * @param	string $email the user email.
+     * @return      the new user identifier or false if something wrong.
+     * @since	0.6
+     */
     function userCreate($username, $name, $email) {
         $user = new JUser();
         $data = array("username" => $username, "name" => $name,
@@ -63,16 +63,16 @@ class JINCJoomlaHelper {
      * @since	0.6
      */
     function userExists($username, $name, $email) {
-        $dbo =& JFactory::getDBO();
+        $dbo = & JFactory::getDBO();
         $query = 'SELECT id FROM #__users ' .
-            'WHERE username = ' . $dbo->quote($username) . ' ' .
-            'AND name  = ' . $dbo->quote($name) . ' ' .
-            'AND email = ' . $dbo->quote($email);
-        
+                'WHERE username = ' . $dbo->quote($username) . ' ' .
+                'AND name  = ' . $dbo->quote($name) . ' ' .
+                'AND email = ' . $dbo->quote($email);
+
         $dbo->setQuery($query);
         // Checking subscription existence
         if ($user_info = $dbo->loadObjectList()) {
-            if (! empty ($user_info)) {
+            if (!empty($user_info)) {
                 $user = $user_info[0];
                 return $user->id;
             }
@@ -80,7 +80,7 @@ class JINCJoomlaHelper {
         return false;
     }
 
-        /**
+    /**
      * Joomla! user information loader. Loads username, name and email from a
      * user identifier.
      *
@@ -94,16 +94,16 @@ class JINCJoomlaHelper {
         jincimport('utility.servicelocator');
         $servicelocator = ServiceLocator::getInstance();
         $logger = $servicelocator->getLogger();
-        
+
         $query = 'SELECT id, username, name, email FROM #__users ' .
-            'WHERE id = ' . (int) $user_id;
-        $dbo =& JFactory::getDBO();
+                'WHERE id = ' . (int) $user_id;
+        $dbo = & JFactory::getDBO();
         $dbo->setQuery($query);
         $logger->debug('JINCJoomlaHelper: executing query: ' . $query);
         $infos = array();
         if ($user_info = $dbo->loadObjectList()) {
-            if (! empty ($user_info)) {
-                $user = $user_info[0];                
+            if (!empty($user_info)) {
+                $user = $user_info[0];
                 $infos['user_id'] = $user->id;
                 $infos['username'] = $user->username;
                 $infos['name'] = $user->name;
@@ -127,14 +127,14 @@ class JINCJoomlaHelper {
         jincimport('utility.servicelocator');
         $servicelocator = ServiceLocator::getInstance();
         $logger = $servicelocator->getLogger();
-        
-        $dbo =& JFactory::getDBO();
+
+        $dbo = & JFactory::getDBO();
         $query = 'SELECT id, username, name, email FROM #__users WHERE username = ' . $dbo->quote($username);
         $dbo->setQuery($query);
         $logger->debug('JINCJoomlaHelper: executing query: ' . $query);
         $infos = array();
         if ($user_info = $dbo->loadObjectList()) {
-            if (! empty ($user_info)) {
+            if (!empty($user_info)) {
                 $user = $user_info[0];
                 $infos['id'] = $user->id;
                 $infos['username'] = $user->username;
@@ -158,14 +158,14 @@ class JINCJoomlaHelper {
         jincimport('utility.servicelocator');
         $servicelocator = ServiceLocator::getInstance();
         $logger = $servicelocator->getLogger();
-        
-        $dbo =& JFactory::getDBO();
+
+        $dbo = & JFactory::getDBO();
         $query = 'SELECT id, username, name, email FROM #__users WHERE email = ' . $dbo->quote($usermail);
-        $dbo->setQuery($query);        
-         $logger->debug('JINCJoomlaHelper: executing query: ' . $query);
-         $infos = array();
+        $dbo->setQuery($query);
+        $logger->debug('JINCJoomlaHelper: executing query: ' . $query);
+        $infos = array();
         if ($user_info = $dbo->loadObjectList()) {
-            if (! empty ($user_info)) {
+            if (!empty($user_info)) {
                 $user = $user_info[0];
                 $infos['id'] = $user->id;
                 $infos['username'] = $user->username;

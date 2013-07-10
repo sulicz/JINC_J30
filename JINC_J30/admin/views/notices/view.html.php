@@ -45,4 +45,19 @@ class JINCViewNotices extends JViewLegacy {
         jincimport('utility.jinchelper');
         JINCHelper::helpOnLine(94);
     }
+    
+    /**
+     * Returns an array of fields the table can be sorted by
+     *
+     * @return  array  Array containing the field name to sort by as the key and display text as value
+     *
+     * @since   3.0
+     */
+    protected function getSortFields() {          
+        return array(
+            'id' => JText::_('COM_JINC_ID'),
+            'name' => JText::_('COM_JINC_NAME'),
+            'title' => JText::_('COM_JINC_TITLE'),
+        );
+    }    
 }
