@@ -69,14 +69,12 @@ class JINCViewNewsletter extends JViewLegacy {
             $user = JFactory::getUser();
             $item = $this->item;
             $this->canAdmin = $user->authorise('core.admin', 'com_jinc.newsletter.' . $item->id);
-            $this->addToolbar();
+            $this->addToolbar();            
             parent::display($tpl);
         }
     }
 
-    protected
-
-    function addToolbar() {
+    protected function addToolbar() {
         JRequest::setVar('hidemainmenu', true);
         $isNew = ($this->item->id == 0);
         $text = $isNew ? JText::_('NEW') : JText::_('EDIT');

@@ -18,11 +18,11 @@
  *   along with JINC.  If not, see <http://www.gnu.org/licenses/>.
  */
 defined('_JEXEC') or die();
-jimport( 'joomla.application.component.view' );
+jincimport('jhelper.jincview');
 require_once JPATH_COMPONENT . '/models/fields/jincnewsletter.php';
 require_once JPATH_COMPONENT . '/models/fields/jincsubstate.php';
 
-class JINCViewSubscribers extends JViewLegacy {
+class JINCViewSubscribers extends JINCView {
     protected $items;
     protected $pagination;
     protected $state;
@@ -47,4 +47,19 @@ class JINCViewSubscribers extends JViewLegacy {
         jincimport('utility.jinchelper');
         JINCHelper::helpOnLine(98);
     }
+    
+    /**
+     * Returns an array of fields the table can be sorted by
+     *
+     * @return  array  Array containing the field name to sort by as the key and display text as value
+     *
+     * @since   3.0
+     */
+    protected function getSortFields() {          
+        return array(
+            'id' => JText::_('COM_JINC_ID'),
+            'n.name' => JText::_('COM_JINC_NEWS_NAME'),
+            'subs_email' => JText::_('COM_JINC_MAIL_ADDRESS'),
+        );
+    }        
 }

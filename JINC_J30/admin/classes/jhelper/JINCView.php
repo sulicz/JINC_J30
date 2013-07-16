@@ -122,5 +122,39 @@ class JINCView extends JViewLegacy {
         <?php
         echo JHtml::_('form.token');
     }
+
+    protected function tmplListTH($columns, $cbcol = true, $idcol = true) {
+        $listDirn = $this->state->get('list.direction');
+        $listOrder = $this->state->get('list.ordering');
+        echo '<thead>';
+        echo '<tr>';
+        if ($cbcol) {
+            ?>
+            <th width="1%" class="hidden-phone">
+                <input type="checkbox" name="checkall-toggle" value="" title="<?php echo JText::_('JGLOBAL_CHECK_ALL'); ?>" onclick="Joomla.checkAll(this)" />
+            </th>
+            <?php
+        }
+        foreach ($columns as $key => $value) {
+            $options = array_key_exists('options', $value)?$value['options']:'';
+            echo '<th ' . $options . '>';
+            if ($value['sortable']) {
+                echo JHtml::_('grid.sort', $value['label'], $value['dbcol'], $listDirn, $listOrder);
+            } else {
+                echo JText::_($value['label']);
+            }
+            echo '</th>';
+        }
+        if ($idcol) {
+            ?>
+            <th width="1%" class="nowrap hidden-phone">
+                <?php echo JHtml::_('grid.sort', 'JGRID_HEADING_ID', 'id', $listDirn, $listOrder); ?>
+            </th>
+            <?php
+        }
+        echo '</tr>';
+        echo '</thead>';
+    }
+
 }
 ?>

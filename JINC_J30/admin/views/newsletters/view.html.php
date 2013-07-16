@@ -42,7 +42,6 @@ class JINCViewNewsletters extends JViewLegacy {
         JToolBarHelper::title(JText::_('COM_JINC_MENU_NEWSLETTERS'), 'jinc');
 
         $bar = JToolBar::getInstance('toolbar');
-        $bar->appendButton('Popup', 'attributes', 'COM_JINC_ATTRIBUTES', 'index.php?option=com_jinc&amp;view=attributes&amp;tmpl=component', 875, 550, 0, 0, '');
         JToolBarHelper::divider();
         JToolBarHelper::addNew('newsletter.add', 'JTOOLBAR_NEW');
         JToolBarHelper::editList('newsletter.edit', 'JTOOLBAR_EDIT');
@@ -50,6 +49,8 @@ class JINCViewNewsletters extends JViewLegacy {
         JToolBarHelper::divider();
         JToolBarHelper::custom('newsletters.publish', 'publish.png', 'publish_f2.png', 'JTOOLBAR_PUBLISH', true);
         JToolBarHelper::custom('newsletters.unpublish', 'unpublish.png', 'unpublish_f2.png', 'JTOOLBAR_UNPUBLISH', true);
+        JToolBarHelper::divider();        
+        $bar->appendButton('Popup', 'attributes', 'COM_JINC_ATTRIBUTES', 'index.php?option=com_jinc&amp;view=attributes&amp;tmpl=component', 875, 550, 0, 0, '');        
         jincimport('utility.jinchelper');
         JINCHelper::helpOnLine(88);
     }

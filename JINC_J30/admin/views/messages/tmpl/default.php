@@ -21,55 +21,32 @@ defined('_JEXEC') or die('Restricted access');
 isset($this->items) or die('Items not defined');
 
 $user = JFactory::getUser();
-$listOrder = $this->state->get('list.ordering');
-$listDirn = $this->state->get('list.direction');
-
 jincimport('utility.jinchtmlhelper');
 jincimport('utility.jincjoomlahelper');
 
-$this->tmplListInit('TEMPLATE_LIST');
+$this->tmplListInit('MESSAGE_LIST');
 ?>
 
 <form action="<?php echo JRoute::_('index.php?option=com_jinc&view=messages'); ?>" method="post" name="adminForm" id="adminForm">
-<?php
+    <?php
     $this->tmplListFormInit();
-?>
+    ?>
 
     <table class="table table-striped" id="messageList">
-        <thead>
-            <?php
-                $headers = array();
-                array_push($headers, array('m.subject', 'COM_JINC_SUBJECT', true));
-                array_push($headers, array('m.bulkmail', 'COM_JINC_TYPE', true));
-                array_push($headers, array('status', 'COM_JINC_STATUS', true));
-                array_push($headers, array('n.name', 'COM_JINC_LIST_NEWS_NAME', true));
-                array_push($headers, array('datasent', 'COM_JINC_LASTSENT', true,
-                    'width="1%" style="min-width:55px" class="nowrap hidden-phone"'));
-            ?>
-            <tr>
-                <th width="1%" class="hidden-phone">
-                    <input type="checkbox" name="checkall-toggle" value="" title="<?php echo JText::_('JGLOBAL_CHECK_ALL'); ?>" onclick="Joomla.checkAll(this)" />
-                </th>
-                <th>
-                    <?php echo JHtml::_('grid.sort', 'COM_JINC_SUBJECT', 'm.subject', $listDirn, $listOrder); ?>
-                </th>
-                <th width="1%" style="min-width:55px" class="nowrap hidden-phone">
-                    <?php echo JHtml::_('grid.sort', 'COM_JINC_TYPE', 'm.bulkmail', $listDirn, $listOrder); ?>
-                </th>
-                <th width="1%" style="min-width:55px" class="nowrap hidden-phone">
-                    <?php echo JHtml::_('grid.sort', 'COM_JINC_STATUS', 'status', $listDirn, $listOrder); ?>
-                </th>
-                <th width="15%" class="nowrap hidden-phone">
-                    <?php echo JHtml::_('grid.sort', 'COM_JINC_LIST_NEWS_NAME', 'n.name', $listDirn, $listOrder); ?>
-                </th>
-                <th width="15%" class="nowrap hidden-phone">
-                    <?php echo JHtml::_('grid.sort', 'COM_JINC_LASTSENT', 'datasent', $listDirn, $listOrder); ?>
-                </th>                
-                <th width="1%" class="nowrap hidden-phone">
-                    <?php echo JHtml::_('grid.sort', 'JGRID_HEADING_ID', 'id', $listDirn, $listOrder); ?>
-                </th>
-            </tr>
-        </thead>    
+        <?php
+        $headers = array();
+        array_push($headers, array('dbcol' => 'm.subject', 'label' => 'COM_JINC_SUBJECT',
+            'sortable' => true));
+        array_push($headers, array('dbcol' => 'm.bulkmail', 'label' => 'COM_JINC_TYPE',
+            'sortable' => true, 'options' => 'width="1%" style="min-width:55px" class="nowrap hidden-phone"'));
+        array_push($headers, array('dbcol' => 'status', 'label' => 'COM_JINC_STATUS',
+            'sortable' => true, 'options' => 'width="1%" style="min-width:55px" class="nowrap hidden-phone"'));
+        array_push($headers, array('dbcol' => 'n.name', 'label' => 'COM_JINC_LIST_NEWS_NAME',
+            'sortable' => true, 'options' => 'class="nowrap hidden-phone"'));
+        array_push($headers, array('dbcol' => 'datasent', 'label' => 'COM_JINC_LASTSENT',
+            'sortable' => true, 'options' => 'width="1%" style="min-width:55px" class="nowrap hidden-phone"'));
+        $this->tmplListTH($headers);
+        ?>
         <tbody>
             <?php
             $base = JURI::base() . 'components/com_jinc/assets/images/icons/';

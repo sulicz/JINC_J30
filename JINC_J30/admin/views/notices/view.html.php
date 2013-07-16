@@ -18,9 +18,9 @@
  *   along with JINC.  If not, see <http://www.gnu.org/licenses/>.
  */
 defined('_JEXEC') or die();
-jimport( 'joomla.application.component.view' );
+jincimport('jhelper.jincview');
 
-class JINCViewNotices extends JViewLegacy {
+class JINCViewNotices extends JINCView {
     protected $items;
     protected $pagination;
     protected $state;
