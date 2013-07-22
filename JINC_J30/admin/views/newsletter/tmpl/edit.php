@@ -43,14 +43,14 @@ $input = $app->input;
 </script>
 
 <script type="text/javascript">
-	Joomla.submitbutton = function(task)
-	{
-		if (task == 'article.cancel' || document.formvalidator.isValid(document.id('item-form')))
-		{
-			<?php //echo $this->form->getField('articletext')->save(); ?>
-			Joomla.submitform(task, document.getElementById('item-form'));
-		}
-	}
+    Joomla.submitbutton = function(task)
+    {
+        if (task == 'article.cancel' || document.formvalidator.isValid(document.id('item-form')))
+        {
+<?php //echo $this->form->getField('articletext')->save();              ?>
+            Joomla.submitform(task, document.getElementById('item-form'));
+        }
+    }
 </script>
 
 <form action="<?php echo JRoute::_('index.php?option=com_jinc&layout=edit&id=' . (int) $this->item->id); ?>" method="post" name="adminForm" id="item-form" class="form-validate">
@@ -58,25 +58,40 @@ $input = $app->input;
         <!-- Begin Content -->
         <div class="span10 form-horizontal">
             <ul class="nav nav-tabs">
-                <li class="active"><a href="#general" data-toggle="tab"><?php echo JText::_('COM_CONTENT_NEWSLETTER_DETAILS'); ?></a></li>
-                <?php //if ($this->canDo->get('core.admin')) : ?>
-                <li><a href="#permissions" data-toggle="tab"><?php echo JText::_('COM_CONTENT_FIELDSET_RULES'); ?></a></li>
-                <?php //endif ?>
+                <li class="active"><a href="#general" data-toggle="tab"><?php echo JText::_('COM_CONTENT_NEWSLETTER_DETAILS'); ?></a></li>                
+                <li><a href="#addresses" data-toggle="tab"><?php echo JText::_('COM_JINC_ADDRESSES'); ?></a></li>
+                <li><a href="#permissions" data-toggle="tab"><?php echo JText::_('COM_JINC_PERMISSION'); ?></a></li>                
             </ul>
 
             <div class="tab-content">
                 <!-- Begin Tabs -->
                 <div class="tab-pane active" id="general">
                     <fieldset class="adminform">
-                        <?php
-                        // Extid is hidden - only for info if this is an external image (the filename field will be not required)
-                        $formArray = array('name', 'type', 'on_subscription', 'jcontact_enabled', 'notify', 'default_template');
-                        foreach ($formArray as $value) {
-                            echo '<li>' . $this->form->getLabel($value) . $this->form->getInput($value) . '</li>' . "\n";
-                        }
-                        ?>
+                        <div class="control-group">
+                            <?php
+                            $formArray = array('name', 'type', 'on_subscription', 'jcontact_enabled', 'notify', 'default_template');
+                            foreach ($formArray as $value) {
+                                echo $this->form->getLabel($value) . $this->form->getInput($value);
+                            }
+                            ?>
+                        </div>
+                        <?php echo $this->form->getLabel('description'); ?>
+                        <?php echo $this->form->getInput('description'); ?>
                     </fieldset>
                 </div>
+
+                <div class="tab-pane" id="addresses">
+                    <div class="row-fluid">
+                        <div class="span6">
+                            <div class="control-group">
+                                <?php foreach ($this->form->getFieldset('addresses') as $name => $field) : ?>
+                                    <?php echo $field->label; ?>
+                                    <?php echo $field->input; ?>
+                                <?php endforeach; ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>                
 
                 <?php // if ($this->canDo->get('core.admin')) : ?>
                 <div class="tab-pane" id="permissions">
