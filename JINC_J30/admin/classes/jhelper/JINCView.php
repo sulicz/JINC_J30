@@ -136,7 +136,7 @@ class JINCView extends JViewLegacy {
             <?php
         }
         foreach ($columns as $key => $value) {
-            $options = array_key_exists('options', $value)?$value['options']:'';
+            $options = array_key_exists('options', $value) ? $value['options'] : '';
             echo '<th ' . $options . '>';
             if ($value['sortable']) {
                 echo JHtml::_('grid.sort', $value['label'], $value['dbcol'], $listDirn, $listOrder);
@@ -154,6 +154,63 @@ class JINCView extends JViewLegacy {
         }
         echo '</tr>';
         echo '</thead>';
+    }
+
+    protected function preEditForm($prefix) {
+        ?>
+        <script type = "text/javascript">
+            Joomla.submitbutton = function(task)
+            {
+                if (task == '<?php echo $prefix; ?>.cancel' || document.formvalidator.isValid(document.id('item-form')))
+                {
+        <?php //echo $this->form->getField('articletext')->save();               
+        ?>
+                    Joomla.submitform(task, document.getElementById('item-form'));
+                }
+            }
+        </script>
+        <?php
+    }
+
+    protected function printTabHeader($name = 'general', $tag = 'COM_JINC_DETAILS', $active = false) {
+        ?>
+        <li <?php if ($active) { ?>class="active"<?php } ?> ><a href="#<? echo $name; ?>" data-toggle="tab"><?php echo JText::_($tag); ?></a></li>
+        <?php
+    }
+
+    protected function printTabBodyFieldset($name) {
+        ?>
+        <div class="tab-pane" id="<?php echo $name; ?>">
+            <div class="row-fluid">
+                <div class="span6">
+                    <div class="control-group">
+                        <?php foreach ($this->form->getFieldset($name) as $name => $field) : ?>
+                            <?php echo $field->label; ?>
+                            <?php echo $field->input; ?>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+            </div>
+        </div>                
+        <?php
+    }
+
+    protected function printTabBodyGeneral($id, $formArray) {
+        ?>
+        <div class="tab-pane active" id="general">
+            <fieldset class="adminform">
+                <div class="control-group">
+                    <?php
+                    
+                    foreach ($formArray as $value) {
+                        echo $this->form->getLabel($value) . $this->form->getInput($value);
+                    }
+                    ?>
+                </div>
+            </fieldset>
+        </div>
+
+        <?php
     }
 
 }

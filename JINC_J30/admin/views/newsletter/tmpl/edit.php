@@ -27,7 +27,7 @@ JHtml::_('formbehavior.chosen', 'select');
 
 jincimport('core.newsletter');
 $app = JFactory::getApplication();
-$input = $app->input;
+$this->preEditForm('newsletter');
 ?>
 <script type="text/javascript">
     function onChangeType() {
@@ -42,56 +42,36 @@ $input = $app->input;
     }        
 </script>
 
-<script type="text/javascript">
-    Joomla.submitbutton = function(task)
-    {
-        if (task == 'article.cancel' || document.formvalidator.isValid(document.id('item-form')))
-        {
-<?php //echo $this->form->getField('articletext')->save();              ?>
-            Joomla.submitform(task, document.getElementById('item-form'));
-        }
-    }
-</script>
-
 <form action="<?php echo JRoute::_('index.php?option=com_jinc&layout=edit&id=' . (int) $this->item->id); ?>" method="post" name="adminForm" id="item-form" class="form-validate">
     <div class="row-fluid">
         <!-- Begin Content -->
         <div class="span10 form-horizontal">
             <ul class="nav nav-tabs">
-                <li class="active"><a href="#general" data-toggle="tab"><?php echo JText::_('COM_CONTENT_NEWSLETTER_DETAILS'); ?></a></li>                
-                <li><a href="#addresses" data-toggle="tab"><?php echo JText::_('COM_JINC_ADDRESSES'); ?></a></li>
-                <li><a href="#permissions" data-toggle="tab"><?php echo JText::_('COM_JINC_PERMISSION'); ?></a></li>                
+                <?php
+                $this->printTabHeader('general', 'COM_JINC_NEWSLETTER_DETAILS', true);
+                $this->printTabHeader('addresses', 'COM_JINC_ADDRESSES');
+                $this->printTabHeader('frontend', 'COM_JINC_FRONTEND');
+                $this->printTabHeader('security', 'COM_JINC_SECURITY');
+                $this->printTabHeader('welcome', 'COM_JINC_WELCOME_DISCLAINER');
+                $this->printTabHeader('optin', 'COM_JINC_OPTIN');
+                $this->printTabHeader('addictional', 'COM_JINC_ATTRIBUTES');
+                $this->printTabHeader('permissions', 'COM_JINC_PERMISSION');
+                ?>
             </ul>
 
             <div class="tab-content">
                 <!-- Begin Tabs -->
-                <div class="tab-pane active" id="general">
-                    <fieldset class="adminform">
-                        <div class="control-group">
-                            <?php
-                            $formArray = array('name', 'type', 'on_subscription', 'jcontact_enabled', 'notify', 'default_template');
-                            foreach ($formArray as $value) {
-                                echo $this->form->getLabel($value) . $this->form->getInput($value);
-                            }
-                            ?>
-                        </div>
-                        <?php echo $this->form->getLabel('description'); ?>
-                        <?php echo $this->form->getInput('description'); ?>
-                    </fieldset>
-                </div>
 
-                <div class="tab-pane" id="addresses">
-                    <div class="row-fluid">
-                        <div class="span6">
-                            <div class="control-group">
-                                <?php foreach ($this->form->getFieldset('addresses') as $name => $field) : ?>
-                                    <?php echo $field->label; ?>
-                                    <?php echo $field->input; ?>
-                                <?php endforeach; ?>
-                            </div>
-                        </div>
-                    </div>
-                </div>                
+                <?php
+                $formArray = array('name', 'type', 'on_subscription', 'jcontact_enabled', 'notify', 'default_template', 'description');
+                $this->printTabBodyGeneral('general', $formArray);
+                $this->printTabBodyFieldset('addresses');
+                $this->printTabBodyFieldset('frontend');
+                $this->printTabBodyFieldset('security');
+                $this->printTabBodyFieldset('welcome');
+                $this->printTabBodyFieldset('optin');
+                $this->printTabBodyFieldset('addictional');
+                ?>
 
                 <?php // if ($this->canDo->get('core.admin')) : ?>
                 <div class="tab-pane" id="permissions">
@@ -103,7 +83,7 @@ $input = $app->input;
                 <!-- End Tabs -->
             </div>
             <input type="hidden" name="task" value="" />
-            <input type="hidden" name="return" value="<?php echo $input->getCmd('return'); ?>" />
+            <input type="hidden" name="return" value="<?php echo $app->input->getCmd('return'); ?>" />
             <?php echo JHtml::_('form.token'); ?>
         </div>
 </form>
