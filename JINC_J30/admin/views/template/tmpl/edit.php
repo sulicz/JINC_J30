@@ -17,65 +17,34 @@
  *   You should have received a copy of the GNU General Public License
  *   along with JINC.  If not, see <http://www.gnu.org/licenses/>.
  */
-defined('_JEXEC') or die('Restricted access');
 ?>
+
 <?php
+defined('_JEXEC') or die('Restricted access');
 isset($this->item) or die('Item is not defined');
-$isNew = ($this->item->id == 0);
+
+$this->preEditForm('template');
 ?>
 
-<script type="text/javascript">
-    <!--
-    function submitbutton(task) {
-        if (task == 'message.cancel' || document.formvalidator.isValid(document.id('message-form'))) {
-            submitform(task);
-        }
-        submitform(task);
-    }
-    // -->
-</script>
-
-<form action="<?php JRoute::_('index.php?option=com_jinc'); ?>" method="post" name="adminForm" id="message-form" class="form-validate">
-    <div class="width-60 fltlft">
-
-        <fieldset class="adminform">
-            <legend><?php echo empty($this->item->id) ? JText::_('COM_JINC_NEW_TEMPLATE') : JText::sprintf('COM_JINC_EDIT_TEMPLATE', $this->item->id); ?></legend>
-
-            <ul class="adminformlist">
+<form action="<?php echo JRoute::_('index.php?option=com_jinc&layout=edit&id=' . (int) $this->item->id); ?>" method="post" name="adminForm" id="item-form" class="form-validate">
+    <div class="row-fluid">
+        <!-- Begin Content -->
+        <div class="span10 form-horizontal">
+            <ul class="nav nav-tabs">
                 <?php
-                $formArray = array('id', 'name', 'subject');
-                foreach ($formArray as $value) {
-                    echo '<li>' . $this->form->getLabel($value) . $this->form->getInput($value) . '</li>' . "\n";
-                }
+                $this->printTabHeader('general', 'COM_JINC_EDIT_TEMPLATE', true);
+                $this->printTabHeader('css', 'COM_JINC_EDIT_CSS');
                 ?>
             </ul>
-            <?php echo $this->form->getLabel('body'); ?>
-            <div class="clr"></div>
-            <?php 
-            jincimport('utility.jinceditor');
-            $editor_helper = new JINCEditor('jform[body]');
-            $editor_helper->content = $this->item->body;
-            if (!$isNew) $editor_helper->setTemplate($this->item->id);
-            echo $editor_helper->display();
-            ?>
-        </fieldset>
-    </div>
 
-    <div class="width-40 fltrt">
-        <fieldset class="adminform">
-            <legend><?php echo JText::_('COM_JINC_EDIT_CSS'); ?></legend>
-
-            <?php if (!$isNew) { ?>
-                <?php 
-                    echo JText::_('COM_JINC_EDIT_CSS_WARNING') . '<br>';
-                    echo $this->form->getLabel('cssfile_content'); ?>
-                <div class="clr"></div>
-                <?php echo $this->form->getInput('cssfile_content'); ?>
-            <?php } else { 
-                echo JText::_('COM_JINC_EDIT_CSS_ISNEW'); } ?>
-        </fieldset>
-    </div>
-
-<input type="hidden" name="task" value="" />
-<?php echo JHtml::_('form.token'); ?>
+            <div class="tab-content">
+                <!-- Begin Tabs -->
+                <?php
+                $formArray = array('name', 'subject');
+                $this->printTabBodyGeneral('general', $formArray, 'body');                
+                $this->printTabBodyFieldset('css');                
+                ?>                
+            </div>
+            <?php $this->printEditEndForm(); ?>
+        </div>
 </form>

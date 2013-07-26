@@ -17,44 +17,34 @@
  *   You should have received a copy of the GNU General Public License
  *   along with JINC.  If not, see <http://www.gnu.org/licenses/>.
  */
-defined('_JEXEC') or die('Restricted access');
 ?>
-<?php isset($this->item) or die('Item is not defined'); ?>
 
-<script type="text/javascript">
-    <!--
-    function submitbutton(task) {
-        if (task == 'notice.cancel' || document.formvalidator.isValid(document.id('notice-form'))) {
-            submitform(task);
-        }
-        submitform(task);
-    }
-    // -->
-</script>
+<?php
+defined('_JEXEC') or die('Restricted access');
+isset($this->item) or die('Item is not defined');
 
-<form action="<?php JRoute::_('index.php?option=com_jinc'); ?>" method="post" name="adminForm" id="message-form" class="form-validate">
-    <div class="width-60 fltlft">
+$this->preEditForm('notice');
+?>
 
-        <fieldset class="adminform">
-            <legend><?php echo empty($this->item->id) ? JText::_('COM_JINC_NEW_NOTICE') : JText::sprintf('COM_JINC_EDIT_NOTICE', $this->item->id); ?></legend>
-
-            <ul class="adminformlist">
+<form action="<?php echo JRoute::_('index.php?option=com_jinc&layout=edit&id=' . (int) $this->item->id); ?>" method="post" name="adminForm" id="item-form" class="form-validate">
+    <div class="row-fluid">
+        <!-- Begin Content -->
+        <div class="span10 form-horizontal">
+            <ul class="nav nav-tabs">
                 <?php
-                // Extid is hidden - only for info if this is an external image (the filename field will be not required)
-                $formArray = array('name', 'title', 'bdesc');
-                foreach ($formArray as $value) {
-                    echo '<li>' . $this->form->getLabel($value) . $this->form->getInput($value) . '</li>' . "\n";
-                } ?>
+                $this->printTabHeader('general', 'COM_JINC_EDIT_NOTICE', true);
+                ?>
             </ul>
-            <?php echo $this->form->getLabel('conditions'); ?>
-                <div class="clr"></div>
-            <?php echo $this->form->getInput('conditions'); ?>
-            </fieldset>
-        </div>
 
-        <div class="width-40 fltrt">    
-        </div>
+            <div class="tab-content">
+                <!-- Begin Tabs -->
 
-            <input type="hidden" name="task" value="" />
-    <?php echo JHtml::_('form.token'); ?>
+                <?php
+                $formArray = array('name', 'title', 'bdesc', 'conditions');
+                $this->printTabBodyGeneral('general', $formArray);
+                ?>
+
+            </div>
+            <?php $this->printEditEndForm(); ?>
+        </div>
 </form>

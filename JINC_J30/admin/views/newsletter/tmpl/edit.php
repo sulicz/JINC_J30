@@ -19,14 +19,7 @@
  */
 defined('_JEXEC') or die;
 
-// Load the tooltip behavior.
-JHtml::_('behavior.tooltip');
-JHtml::_('behavior.formvalidation');
-JHtml::_('behavior.keepalive');
-JHtml::_('formbehavior.chosen', 'select');
-
 jincimport('core.newsletter');
-$app = JFactory::getApplication();
 $this->preEditForm('newsletter');
 ?>
 <script type="text/javascript">
@@ -71,20 +64,11 @@ $this->preEditForm('newsletter');
                 $this->printTabBodyFieldset('welcome');
                 $this->printTabBodyFieldset('optin');
                 $this->printTabBodyFieldset('addictional');
+                $this->printTabBodyPermission();
                 ?>
-
-                <?php // if ($this->canDo->get('core.admin')) : ?>
-                <div class="tab-pane" id="permissions">
-                    <fieldset>
-                        <?php echo $this->form->getInput('rules'); ?>
-                    </fieldset>
-                </div>
-                <?php // endif; ?>
-                <!-- End Tabs -->
+                
             </div>
-            <input type="hidden" name="task" value="" />
-            <input type="hidden" name="return" value="<?php echo $app->input->getCmd('return'); ?>" />
-            <?php echo JHtml::_('form.token'); ?>
+            <?php $this->printEditEndForm(); ?>
         </div>
 </form>
 

@@ -8,7 +8,9 @@
             name="body" type="editor"
             label="COM_JINC_BODY"  description="COM_JINC_BODY_DESC"
             class="inputbox" required="true"
-            filter="safehtml" buttons="true"/>
-        <field name="cssfile_content" type="textarea" default="" label="COM_JINC_CSSFILE_CONTENT" description="COM_JINC_CSSFILE_CONTENT_DESC" rows="30" cols="35" filter="safehtml" />
+            filter="safehtml" buttons="true"/>                
+    </fieldset>
+    <fieldset name="css" label="COM_JINC_CSS" >
+        <field name="cssfile_content" type="textarea" default="" label="COM_JINC_CSSFILE_CONTENT" description="COM_JINC_CSSFILE_CONTENT_DESC" rows="30" cols="70" filter="safehtml" />
     </fieldset>
 </form>

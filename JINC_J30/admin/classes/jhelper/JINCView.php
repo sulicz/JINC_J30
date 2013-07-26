@@ -157,6 +157,11 @@ class JINCView extends JViewLegacy {
     }
 
     protected function preEditForm($prefix) {
+        // Load the tooltip behavior.
+        JHtml::_('behavior.tooltip');
+        JHtml::_('behavior.formvalidation');
+        JHtml::_('behavior.keepalive');
+        JHtml::_('formbehavior.chosen', 'select');
         ?>
         <script type = "text/javascript">
             Joomla.submitbutton = function(task)
@@ -195,15 +200,23 @@ class JINCView extends JViewLegacy {
         <?php
     }
 
-    protected function printTabBodyGeneral($id, $formArray) {
+    protected function printTabBodyGeneral($id, $formArray, $jEditor = '') {
         ?>
         <div class="tab-pane active" id="general">
             <fieldset class="adminform">
                 <div class="control-group">
                     <?php
-                    
                     foreach ($formArray as $value) {
                         echo $this->form->getLabel($value) . $this->form->getInput($value);
+                    }
+                    if (strlen($jEditor)) {
+                        jincimport('utility.jinceditor');
+                        $editor_helper = new JINCEditor('jform[' . $jEditor . ']');
+                        $editor_helper->content = $this->item->$jEditor;
+                        if (! ($this->item->id == 0))
+                            $editor_helper->setTemplate($this->item->id);
+
+                        echo $this->form->getLabel($jEditor) . $editor_helper->display();
                     }
                     ?>
                 </div>
@@ -211,6 +224,27 @@ class JINCView extends JViewLegacy {
         </div>
 
         <?php
+    }
+
+    protected function printTabBodyPermission() {
+        // if ($this->canDo->get('core.admin')) : 
+        ?>
+        <div class="tab-pane" id="permissions">
+            <fieldset>
+                <?php echo $this->form->getInput('rules'); ?>
+            </fieldset>
+        </div>
+        <?php
+        // endif;
+    }
+
+    protected function printEditEndForm() {
+        $app = JFactory::getApplication();
+        ?>
+        <input type="hidden" name="task" value="" />
+        <input type="hidden" name="return" value="<?php echo $app->input->getCmd('return'); ?>" />
+        <?php
+        echo JHtml::_('form.token');
     }
 
 }
