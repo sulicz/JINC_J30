@@ -37,7 +37,7 @@
         </field>
     </fieldset>
 
-    <fields name="attachment">
+    <fieldset name="attachment" label="COM_JINC_ATTACHMENTS">
         <field name="attach0" type="media" class="inputbox" size="35" maxlength="250"
             label="COM_JINC_ATTACH0" description="COM_JINC_ATTACH0_DESC"/>
 
@@ -53,5 +53,5 @@
         <field name="attach4" type="media" class="inputbox" size="35" maxlength="250"
             label="COM_JINC_ATTACH4" description="COM_JINC_ATTACH4_DESC"/>
 
-    </fields>
+    </fieldset>
 </form>

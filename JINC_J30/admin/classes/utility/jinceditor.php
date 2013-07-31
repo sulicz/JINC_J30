@@ -40,7 +40,7 @@ class JINCEditor {
         $this->myEditor = JFactory::getEditor();
         $this->myEditor->initialise();
     }
-
+    
     function setTemplate($id) {
         if (empty($id))
             return;

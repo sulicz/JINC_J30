@@ -24,6 +24,7 @@ defined('_JEXEC') or die('Restricted access');
 isset($this->item) or die('Item is not defined');
 
 $this->preEditForm('template');
+jincimport('utility.jinceditor');
 ?>
 
 <form action="<?php echo JRoute::_('index.php?option=com_jinc&layout=edit&id=' . (int) $this->item->id); ?>" method="post" name="adminForm" id="item-form" class="form-validate">
@@ -41,7 +42,8 @@ $this->preEditForm('template');
                 <!-- Begin Tabs -->
                 <?php
                 $formArray = array('name', 'subject');
-                $this->printTabBodyGeneral('general', $formArray, 'body');                
+                $jeditor = new JINCEditor('jform[body]');
+                $this->printTabBodyGeneral('general', $formArray, array('body', $jeditor));
                 $this->printTabBodyFieldset('css');                
                 ?>                
             </div>

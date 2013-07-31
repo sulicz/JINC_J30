@@ -18,8 +18,8 @@
  *   along with JINC.  If not, see <http://www.gnu.org/licenses/>.
  */
 defined('_JEXEC') or die;
-JHtml::_('behavior.tooltip');
-JHtml::_('behavior.formvalidation');
+
+$this->preEditForm('message');
 
 JHTML::script('administrator/components/com_jinc/assets/js/phplivex.js');
 JHTML::script('administrator/components/com_jinc/assets/js/commons.js');
@@ -29,64 +29,32 @@ jincimport('utility.jinchtmlhelper');
 jincimport('utility.jinceditor');
 ?>
 
-<form action="<?php JRoute::_('index.php?option=com_jinc'); ?>" method="post" name="adminForm" id="message-form" class="form-validate">
-    <div class="width-60 fltlft">
-
-        <fieldset class="adminform">
-            <legend><?php echo empty($this->item->id) ? JText::_('COM_JINC_NEW_MESSAGE') : JText::sprintf('COM_JINC_EDIT_MESSAGE', $this->item->id); ?></legend>
-
-            <ul class="adminformlist">
+<form action="<?php echo JRoute::_('index.php?option=com_jinc&layout=edit&id=' . (int) $this->item->id); ?>" method="post" name="adminForm" id="item-form" class="form-validate">
+    <div class="row-fluid">
+        <!-- Begin Content -->
+        <div class="span10 form-horizontal">
+            <ul class="nav nav-tabs">
                 <?php
-                // Extid is hidden - only for info if this is an external image (the filename field will be not required)
-                $formArray = array('id', 'subject', 'news_id', 'tem_id');
-                foreach ($formArray as $value) {
-                    echo '<li>' . $this->form->getLabel($value) . $this->form->getInput($value) . '</li>' . "\n";
-                }
+                $this->printTabHeader('general', 'COM_JINC_DETAILS', true);
+                $this->printTabHeader('basic_opts', 'COM_JINC_BASIC_OPTIONS');
+                $this->printTabHeader('attachment', 'COM_JINC_ATTACHMENTS');
                 ?>
             </ul>
 
-            <?php echo $this->form->getLabel('body'); ?>
-            <div class="clr"></div>
+            <div class="tab-content">
+                <!-- Begin Tabs -->
 
-            <?php
-            $jeditor = new JINCEditor('jform[body]');
-            $jeditor->content = $this->item->body;
-            if (!empty($this->item->tem_id))
-                $jeditor->setTemplate($this->item->tem_id);
-            echo $jeditor->display();
-            ?>
-        </fieldset>
-    </div>
-
-    <div class="width-40 fltrt">
-
-        <?php echo JHtml::_('sliders.start', 'jinc-sliders-' . $this->item->id, array('useCookie' => 1)); ?>
-
-        <?php echo JHtml::_('sliders.panel', JText::_('COM_JINC_BASIC_OPTIONS'), 'basic-options'); ?>
-        <fieldset class="adminform">
-            <ul class="adminformlist">
                 <?php
-                foreach ($this->form->getFieldset('basic_opts') as $field) {
-                    echo '<li>';
-                    if (!$field->hidden) {
-                        echo $field->label;
-                    }
-                    echo $field->input;
-                    echo '</li>';
-                }
+                $formArray = array('subject', 'news_id', 'tem_id');
+                $jeditor = new JINCEditor('jform[body]');
+                $this->printTabBodyGeneral('general', $formArray, array('body', $jeditor) );
+                $this->printTabBodyFieldset('basic_opts');
+                $this->printTabBodyFieldset('attachment');
                 ?>
-            </ul>
-        </fieldset>
-        <?php echo JHtml::_('sliders.panel', JText::_('COM_JINC_ATTACHMENTS'), 'attachments'); ?>
-        <fieldset class="panelform">
-            <?php echo $this->loadTemplate('attachment'); ?>
-        </fieldset>
 
-        <?php echo JHtml::_('sliders.end'); ?>
-    </div>
-
-    <input type="hidden" name="task" value="" />
-    <?php echo JHtml::_('form.token'); ?>
+            </div>
+            <?php $this->printEditEndForm(); ?>
+        </div>
 </form>
 
 <script type="text/javascript">

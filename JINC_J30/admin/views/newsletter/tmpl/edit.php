@@ -41,7 +41,7 @@ $this->preEditForm('newsletter');
         <div class="span10 form-horizontal">
             <ul class="nav nav-tabs">
                 <?php
-                $this->printTabHeader('general', 'COM_JINC_NEWSLETTER_DETAILS', true);
+                $this->printTabHeader('general', 'COM_JINC_DETAILS', true);
                 $this->printTabHeader('addresses', 'COM_JINC_ADDRESSES');
                 $this->printTabHeader('frontend', 'COM_JINC_FRONTEND');
                 $this->printTabHeader('security', 'COM_JINC_SECURITY');

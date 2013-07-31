@@ -200,7 +200,7 @@ class JINCView extends JViewLegacy {
         <?php
     }
 
-    protected function printTabBodyGeneral($id, $formArray, $jEditor = '') {
+    protected function printTabBodyGeneral($id, $formArray, $editor = NULL) {
         ?>
         <div class="tab-pane active" id="general">
             <fieldset class="adminform">
@@ -209,14 +209,15 @@ class JINCView extends JViewLegacy {
                     foreach ($formArray as $value) {
                         echo $this->form->getLabel($value) . $this->form->getInput($value);
                     }
-                    if (strlen($jEditor)) {
+                    if (! is_null($editor) && is_array($editor)) {
                         jincimport('utility.jinceditor');
-                        $editor_helper = new JINCEditor('jform[' . $jEditor . ']');
-                        $editor_helper->content = $this->item->$jEditor;
+                        $editorName = $editor[0];                        
+                        $jEditor = $editor[1];
+                        $jEditor->content = $this->item->$editorName;
                         if (! ($this->item->id == 0))
-                            $editor_helper->setTemplate($this->item->id);
+                            $jEditor->setTemplate($this->item->id);
 
-                        echo $this->form->getLabel($jEditor) . $editor_helper->display();
+                        echo $this->form->getLabel($editorName) . $jEditor->display();
                     }
                     ?>
                 </div>
