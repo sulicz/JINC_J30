@@ -179,7 +179,7 @@ class JINCView extends JViewLegacy {
 
     protected function printTabHeader($name = 'general', $tag = 'COM_JINC_DETAILS', $active = false) {
         ?>
-        <li <?php if ($active) { ?>class="active"<?php } ?> ><a href="#<? echo $name; ?>" data-toggle="tab"><?php echo JText::_($tag); ?></a></li>
+        <li <?php if ($active) { ?>class="active"<?php } ?> ><a href="<?php echo $name; ?>" data-toggle="tab"><?php echo JText::_($tag); ?></a></li>
         <?php
     }
 

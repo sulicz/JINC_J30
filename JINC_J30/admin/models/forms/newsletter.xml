@@ -8,8 +8,15 @@
 
         <field name="name" type="text" class="inputbox" size="50"
                label="COM_JINC_NEWS_NAME" description="COM_JINC_NEWS_NAME_DESC"
+               class="inputbox input-xxlarge input-large-text"               
+               size="40"
                required="true" />
 
+        <field name="description" type="editor" buttons="true"
+               hide="article,pagebreak,readmore" class="inputbox"
+               label="COM_JINC_NEWS_DESCRIPTION" description="COM_JINC_NEWS_DESCRIPTION_DESC"
+               filter="safehtml" />
+        
         <field name="type" type="list" label="COM_JINC_NEWS_TYPE" 
                description="COM_JINC_NEWS_TYPE_DESC" class="inputbox"
                size="1" default="0" onchange="onChangeType();">
@@ -41,11 +48,6 @@
         <field name="default_template" type="JINCTemplate" 
                label="COM_JINC_DEF_TEMPLATE"  description="COM_JINC_DEF_TEMPLATE_DESC"
                class="inputbox" />
-
-        <field name="description" type="editor" buttons="true"
-               hide="article,pagebreak,readmore" class="inputbox"
-               label="COM_JINC_NEWS_DESCRIPTION" description="COM_JINC_NEWS_DESCRIPTION_DESC"
-               filter="safehtml" />
 
         <field name="rules" type="rules" label="JFIELD_RULES_LABEL"
                translate_label="false" class="inputbox" filter="rules"
