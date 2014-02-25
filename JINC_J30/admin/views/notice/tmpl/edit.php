@@ -27,6 +27,14 @@ $this->preEditForm('notice');
 ?>
 
 <form action="<?php echo JRoute::_('index.php?option=com_jinc&layout=edit&id=' . (int) $this->item->id); ?>" method="post" name="adminForm" id="item-form" class="form-validate">
+    <div class="form-inline form-inline-header">
+        <?php
+        $form = $this->getForm();
+        echo $form->getControlGroup('name');
+        echo $form->getControlGroup('title');
+        ?>
+    </div>   
+
     <div class="row-fluid">
         <!-- Begin Content -->
         <div class="span10 form-horizontal">
@@ -40,8 +48,7 @@ $this->preEditForm('notice');
                 <!-- Begin Tabs -->
 
                 <?php
-                $formArray = array('name', 'title', 'bdesc', 'conditions');
-                $this->printTabBodyGeneral('general', $formArray);
+                $this->printTabBodyGeneralRightCol('general', array('conditions'), array('bdesc'));
                 ?>
 
             </div>

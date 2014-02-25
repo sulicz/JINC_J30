@@ -81,7 +81,8 @@ class JINCView extends JViewLegacy {
                 </div>
                 <div class="btn-group pull-left hidden-phone">
                     <button class="btn tip hasTooltip" type="submit" title="<?php echo JText::_('JSEARCH_FILTER_SUBMIT'); ?>"><i class="icon-search"></i></button>
-                    <button class="btn tip hasTooltip" type="button" onclick="document.id('filter_search').value='';this.form.submit();" title="<?php echo JText::_('JSEARCH_FILTER_CLEAR'); ?>"><i class="icon-remove"></i></button>
+                    <button class="btn tip hasTooltip" type="button" onclick="document.id('filter_search').value = '';
+                            this.form.submit();" title="<?php echo JText::_('JSEARCH_FILTER_CLEAR'); ?>"><i class="icon-remove"></i></button>
                 </div>
                 <div class="btn-group pull-right hidden-phone">
                     <label for="limit" class="element-invisible"><?php echo JText::_('JFIELD_PLG_SEARCH_SEARCHLIMIT_DESC'); ?></label>
@@ -179,7 +180,7 @@ class JINCView extends JViewLegacy {
 
     protected function printTabHeader($name = 'general', $tag = 'COM_JINC_DETAILS', $active = false) {
         ?>
-        <li <?php if ($active) { ?>class="active"<?php } ?> ><a href="<?php echo $name; ?>" data-toggle="tab"><?php echo JText::_($tag); ?></a></li>
+        <li <?php if ($active) { ?>class="active"<?php } ?> ><a href="<?php echo "#" . $name; ?>" data-toggle="tab"><?php echo JText::_($tag); ?></a></li>
         <?php
     }
 
@@ -200,28 +201,65 @@ class JINCView extends JViewLegacy {
         <?php
     }
 
-    protected function printTabBodyGeneral($id, $formArray, $editor = NULL) {
+    protected function printTabTwoColumns($id, $leftFormArray, $rightFormArray, $editor = NULL) {
         ?>
-        <div class="tab-pane active" id="general">
-            <fieldset class="adminform">
-                <div class="control-group">
-                    <?php
-                    foreach ($formArray as $value) {
-                        echo $this->form->getLabel($value) . $this->form->getInput($value);
-                    }
-                    if (! is_null($editor) && is_array($editor)) {
-                        jincimport('utility.jinceditor');
-                        $editorName = $editor[0];                        
-                        $jEditor = $editor[1];
-                        $jEditor->content = $this->item->$editorName;
-                        if (! ($this->item->id == 0))
-                            $jEditor->setTemplate($this->item->id);
+        <div class="tab-pane active" id="<?php echo $id; ?>">
+            <div class="row-fluid">
+                <div class="span6">
+                    <fieldset class="adminform">
+                        <?php
+                        foreach ($leftFormArray as $value) {
+                            echo $this->form->getLabel($value) . $this->form->getInput($value);
+                        }
+                        ?>
+                    </fieldset>
+                </div>
 
-                        echo $this->form->getLabel($editorName) . $jEditor->display();
+                <div class="span6">
+                    <?php
+                    foreach ($rightFormArray as $value) {
+                        echo $this->form->getLabel($value) . $this->form->getInput($value);
                     }
                     ?>
                 </div>
-            </fieldset>
+            </div>            
+        </div>
+
+        <?php
+    }
+
+    protected function printTabBodyGeneralRightCol($id, $formArray, $formArrayRight, $editor = NULL) {
+        ?>
+        <div class="tab-pane active" id="general">
+            <div class="row-fluid">
+                <div class="span9">
+                    <fieldset class="adminform">
+                        <?php
+                        foreach ($formArray as $value) {
+                            echo $this->form->getLabel($value) . $this->form->getInput($value);
+                        }
+                        if (!is_null($editor) && is_array($editor)) {
+                            jincimport('utility.jinceditor');
+                            $editorName = $editor[0];
+                            $jEditor = $editor[1];
+                            $jEditor->content = $this->item->$editorName;
+                            if (!($this->item->id == 0))
+                                $jEditor->setTemplate($this->item->id);
+
+                            echo $this->form->getLabel($editorName) . $jEditor->display();
+                        }
+                        ?>
+                    </fieldset>
+                </div>
+
+                <div class="span3">
+                    <?php
+                    foreach ($formArrayRight as $value) {
+                        echo $this->form->getLabel($value) . $this->form->getInput($value);
+                    }
+                    ?>
+                </div>
+            </div>            
         </div>
 
         <?php

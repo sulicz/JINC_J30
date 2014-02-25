@@ -27,24 +27,31 @@ $this->preEditForm('newsletter');
         var jform_jcontact_enabled = document.getElementById('jform_jcontact_enabled');
         var jform_type = document.getElementById("jform_type");
         var news_type = jform_type.options[jform_type.selectedIndex].value;
-                
-        jform_jcontact_enabled.disabled = (news_type != <?php echo NEWSLETTER_PRIVATE_NEWS; ?>);        
+
+        jform_jcontact_enabled.disabled = (news_type != <?php echo NEWSLETTER_PRIVATE_NEWS; ?>);
         if (news_type != <?php echo NEWSLETTER_PRIVATE_NEWS; ?>) {
             jform_jcontact_enabled.selectedIndex = 0;
         }
-    }        
+    }
 </script>
 
 <form action="<?php echo JRoute::_('index.php?option=com_jinc&layout=edit&id=' . (int) $this->item->id); ?>" method="post" name="adminForm" id="item-form" class="form-validate">
+    <div class="form-inline form-inline-header">
+        <?php
+        $form = $this->getForm();
+        echo $form->getControlGroup('name');
+        echo $form->getControlGroup('type');
+        ?>
+    </div>   
+
+
     <div class="row-fluid">
         <!-- Begin Content -->
-        <div class="span10 form-horizontal">
+        <div class="form-horizontal">
             <ul class="nav nav-tabs">
                 <?php
                 $this->printTabHeader('general', 'COM_JINC_DETAILS', true);
-                $this->printTabHeader('addresses', 'COM_JINC_ADDRESSES');
-                $this->printTabHeader('frontend', 'COM_JINC_FRONTEND');
-                $this->printTabHeader('security', 'COM_JINC_SECURITY');
+                $this->printTabHeader('frontend', 'COM_JINC_FRONTEND_SECURITY');
                 $this->printTabHeader('welcome', 'COM_JINC_WELCOME_DISCLAINER');
                 $this->printTabHeader('optin', 'COM_JINC_OPTIN');
                 $this->printTabHeader('addictional', 'COM_JINC_ATTRIBUTES');
@@ -56,20 +63,23 @@ $this->preEditForm('newsletter');
                 <!-- Begin Tabs -->
 
                 <?php
-                $formArray = array('name', 'type', 'on_subscription', 'jcontact_enabled', 'notify', 'default_template', 'description');
-                $this->printTabBodyGeneral('general', $formArray);
-                $this->printTabBodyFieldset('addresses');
+                $formArray = array('description');
+                $formArrayRight = array('on_subscription', 'jcontact_enabled', 'notify', 'default_template', 'sendername', 'senderaddr', 'replyto_name', 'replyto_addr');
+
+                $this->printTabBodyGeneralRightCol('general', $formArray, $formArrayRight);
                 $this->printTabBodyFieldset('frontend');
-                $this->printTabBodyFieldset('security');
-                $this->printTabBodyFieldset('welcome');
-                $this->printTabBodyFieldset('optin');
+                $this->printTabTwoColumns('welcome', array('welcome_subject', 'welcome'), 
+                        array('disclaimer'));
+                $this->printTabTwoColumns('optin', array('optin_subject', 'optin'),
+                        array('optinremove_subject', 'optinremove'));
                 $this->printTabBodyFieldset('addictional');
                 $this->printTabBodyPermission();
                 ?>
-                
+
             </div>
             <?php $this->printEditEndForm(); ?>
         </div>
+
 </form>
 
 <script type="text/javascript">

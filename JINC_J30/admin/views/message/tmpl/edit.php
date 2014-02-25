@@ -30,13 +30,20 @@ jincimport('utility.jinceditor');
 ?>
 
 <form action="<?php echo JRoute::_('index.php?option=com_jinc&layout=edit&id=' . (int) $this->item->id); ?>" method="post" name="adminForm" id="item-form" class="form-validate">
+    <div class="form-inline form-inline-header">
+        <?php
+        $form = $this->getForm();
+        echo $form->getControlGroup('subject');
+        echo $form->getControlGroup('news_id');
+        ?>
+    </div>   
+    
     <div class="row-fluid">
         <!-- Begin Content -->
         <div class="span10 form-horizontal">
             <ul class="nav nav-tabs">
                 <?php
                 $this->printTabHeader('general', 'COM_JINC_DETAILS', true);
-                $this->printTabHeader('basic_opts', 'COM_JINC_BASIC_OPTIONS');
                 $this->printTabHeader('attachment', 'COM_JINC_ATTACHMENTS');
                 ?>
             </ul>
@@ -45,10 +52,8 @@ jincimport('utility.jinceditor');
                 <!-- Begin Tabs -->
 
                 <?php
-                $formArray = array('subject', 'news_id', 'tem_id');
                 $jeditor = new JINCEditor('jform[body]');
-                $this->printTabBodyGeneral('general', $formArray, array('body', $jeditor) );
-                $this->printTabBodyFieldset('basic_opts');
+                $this->printTabBodyGeneralRightCol('general', array(), array('tem_id', 'bulkmail', 'plaintext'), array('body', $jeditor) );
                 $this->printTabBodyFieldset('attachment');
                 ?>
 
