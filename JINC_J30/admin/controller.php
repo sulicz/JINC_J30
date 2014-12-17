@@ -35,8 +35,8 @@ if (($view == 'newsletters') || ($view == 'messages') || ($view == 'subscribers'
 }
 
 class JINCController extends JControllerLegacy {
-    function display() {
-        parent::display();
+    function display($cachable = false, $urlparams = array()) {
+        parent::display($cachable, $urlparams);
     }
 }
 ?>
