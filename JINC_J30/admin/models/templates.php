@@ -35,7 +35,7 @@ class JINCModelTemplates extends JModelList {
         parent::__construct($config);
     }
     
-    protected function populateState() {
+    protected function populateState($ordering=null, $direction=null) {
         $app = JFactory::getApplication('administrator');
 
         $filterSearch = $app->getUserStateFromRequest($this->context . '.filter.search', 'filter_search', '');

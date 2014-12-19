@@ -98,7 +98,7 @@ class JINCModelAttributes extends JModelAdmin {
             return $response->toString();
         }
 
-        $dbo = & JFactory::getDBO();
+        $dbo = JFactory::getDBO();
         $attr_name_db = $dbo->escape($attr_name);
         $attr_description_db = $dbo->quote($dbo->escape($attr_description), false);
         $attr_name_i18n_db = $dbo->quote($dbo->escape($attr_name_i18n), false);

@@ -35,7 +35,7 @@ class JINCModelMessages extends JModelList {
         parent::__construct($config);
     }
 
-    protected function populateState() {
+    protected function populateState($ordering=null, $direction=null) {
         $app = JFactory::getApplication('administrator');
 
         $newsletterId = $app->getUserStateFromRequest($this->context . '.filter.news_id', 'filter_news_id', '');

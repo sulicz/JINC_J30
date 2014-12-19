@@ -359,7 +359,7 @@ class Newsletter extends JINCObject {
             $msg = preg_replace('/\[ATTR_' . strtoupper($attr_name) . '\]/s', $attr_value, $msg);
         }
 
-        $message = & JFactory::getMailer();
+        $message =  JFactory::getMailer();
         $message->ContentType = "text/html";
         $subject = $this->get('welcome_subject');
         $subject = preg_replace('/\[SENDER\]/s', $this->get('sendername'), $subject);
@@ -480,7 +480,7 @@ class Newsletter extends JINCObject {
         jincimport('utility.servicelocator');
         $servicelocator = ServiceLocator::getInstance();
         $logger = $servicelocator->getLogger();
-        $dbo = & JFactory::getDBO();
+        $dbo = JFactory::getDBO();
         $news_id = $this->get('id');
         foreach ($attributes as $attr_name => $attr_value) {
             $attr_name_db = $dbo->escape($attr_name);
@@ -523,7 +523,7 @@ class Newsletter extends JINCObject {
         jincimport('utility.servicelocator');
         $servicelocator = ServiceLocator::getInstance();
         $logger = $servicelocator->getLogger();
-        $dbo = & JFactory::getDBO();
+        $dbo = JFactory::getDBO();
         $news_id = $this->get('id');
 
         $ninstance = NewsletterFactory::getInstance();

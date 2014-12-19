@@ -126,7 +126,7 @@ class PublicRetriever extends SubsRetriever {
                 'ORDER BY s.datasub, s.id ' .
                 'LIMIT 0, ' . $max_mails * $multiplexer;
 
-        $dbo = & JFactory::getDBO();
+        $dbo = JFactory::getDBO();
         $dbo->setQuery($query);
         $logger->debug('PublicRetriever: executing query: ' . $query);
         return $dbo->loadAssocList();
@@ -174,7 +174,7 @@ class PublicRetriever extends SubsRetriever {
 
         $query .= 'WHERE n.id = ' . (int) $this->getNewsId() . ' AND s.id = ' . (int) $id;
 
-        $dbo = & JFactory::getDBO();
+        $dbo = JFactory::getDBO();
         $dbo->setQuery($query);
         $logger->debug('PublicRetriever: executing query: ' . $query);
         if ($info = $dbo->loadAssocList()) {
@@ -202,7 +202,7 @@ class PublicRetriever extends SubsRetriever {
                 'LEFT JOIN #__jinc_subscriber s ON n.id = s.news_id ' .
                 'WHERE n.id = ' . (int) $this->getNewsId();
 
-        $dbo = & JFactory::getDBO();
+        $dbo = JFactory::getDBO();
         $dbo->setQuery($query);
         $logger->debug('PublicRetriever: executing query ' . $query);
         if ($result = $dbo->loadObjectList()) {

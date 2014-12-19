@@ -64,7 +64,7 @@ class StandardProcess extends Process {
         jincimport('utility.servicelocator');
         $servicelocator = ServiceLocator::getInstance();
         $logger = $servicelocator->getLogger();
-        $dbo = & JFactory::getDBO();
+        $dbo = JFactory::getDBO();
 
         if ($this->status == PROCESS_STATUS_RUNNING && $this->client_id != $client_id) {
             $this->setError('COM_JINC_ERR042');
@@ -122,7 +122,7 @@ class StandardProcess extends Process {
                 $this->updateStatus(PROCESS_STATUS_FINISHED);
 
                 $logger->finer('Process: triggering message sent event');
-                $dispatcher = &JDispatcher::getInstance();
+                $dispatcher = JDispatcher::getInstance();
                 $params = array('news_id' => $news_id, 'msg_id' => $msg_id);
                 $result = $dispatcher->trigger('jinc_sent', $params);
             }

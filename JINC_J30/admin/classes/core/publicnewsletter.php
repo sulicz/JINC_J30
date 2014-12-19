@@ -113,7 +113,7 @@ class PublicNewsletter extends Newsletter {
                 $query .= ' AND random = \'\'';
         }
         $logger->debug('PublicNewsletter: Executing query: ' . $query);
-        $dbo = & JFactory::getDBO();
+        $dbo = JFactory::getDBO();
         $dbo->setQuery($query);
         // Checking subscription existence
         if (($dbo->query()) && ($dbo->getNumRows() > 0)) {
@@ -178,7 +178,7 @@ class PublicNewsletter extends Newsletter {
             jincimport('utility.jinchelper');
             $ip = JINCHelper::getRealIpAddr();
 
-            $dbo = & JFactory::getDBO();
+            $dbo = JFactory::getDBO();
             $query = 'INSERT IGNORE INTO #__jinc_subscriber ' .
                     '(news_id , email, datasub, random, ipaddr) ' .
                     'VALUES (' . (int) $news_id . ', ' .
@@ -237,7 +237,7 @@ class PublicNewsletter extends Newsletter {
                 $msg = preg_replace('#url[ ]*\(\'(?!https?://)(?:\.\./|\./|/)?#', 'url(\'' . $root_uri, $msg);
 
                 // Message composition
-                $message = & JFactory::getMailer();
+                $message = JFactory::getMailer();
                 $message->ContentType = "text/html";
                 $message->setSubject($this->get('optin_subject'));
                 $message->setBody($msg);
@@ -259,7 +259,7 @@ class PublicNewsletter extends Newsletter {
             return false;
         }
         if (isset($subscriber_info['noptin']) && $subscriber_info['noptin']) {
-            $dispatcher = &JDispatcher::getInstance();
+            $dispatcher = JDispatcher::getInstance();
             $params = array('news_id' => $this->get('id'),
                 'news_name' => $this->get('name'),
                 'subs_name' => $subscriber_info['email'],
@@ -320,7 +320,7 @@ class PublicNewsletter extends Newsletter {
                     'WHERE id = ' . (int) $id . ' ' .
                     'AND news_id = ' . (int) $this->get('id');
             $logger->debug('PublicNewsletter: Executing query: ' . $query);
-            $dbo = & JFactory::getDBO();
+            $dbo = JFactory::getDBO();
             $dbo->setQuery($query);
             if (!$dbo->query()) {
                 $this->setError('COM_JINC_ERR025');
@@ -332,7 +332,7 @@ class PublicNewsletter extends Newsletter {
             }
             $this->removeAttributeOnUnsubscription($id);
             // Triggering unsubscription event
-            $dispatcher = &JDispatcher::getInstance();
+            $dispatcher = JDispatcher::getInstance();
             $params = array('news_id' => $this->get('id'));
             $result = $dispatcher->trigger('jinc_unsubscribe', $params);
             $result = true;
@@ -343,7 +343,7 @@ class PublicNewsletter extends Newsletter {
             $email = $subscriber_info['email'];
             $news_id = $this->get('id');
 
-            $dbo = & JFactory::getDBO();
+            $dbo = JFactory::getDBO();
             $query = 'UPDATE #__jinc_subscriber SET random = ' . $dbo->quote($random) . ' ' .
                     'WHERE news_id = ' . (int) $news_id . ' AND email = ' . $dbo->quote($email);
             $logger->debug('PublicNewsletter: Executing query: ' . $query);
@@ -371,7 +371,7 @@ class PublicNewsletter extends Newsletter {
                 $msg = preg_replace('#href[ ]*=[ ]*\"(?!https?://)(?!mailto?:)(?:\.\./|\./|/)?#', 'href="' . $root_uri, $msg);
 
                 // Message composition
-                $message = & JFactory::getMailer();
+                $message = JFactory::getMailer();
                 $message->ContentType = "text/html";
                 $message->setSubject($this->get('optinremove_subject'));
                 $message->setBody($msg);
@@ -428,7 +428,7 @@ class PublicNewsletter extends Newsletter {
         $logger = $servicelocator->getLogger();
 
         $news_id = $this->get('id');
-        $dbo = & JFactory::getDBO();
+        $dbo = JFactory::getDBO();
         $query = 'UPDATE #__jinc_subscriber SET random = \'\', datasub = now() ' .
                 'WHERE email = ' . $dbo->quote($usermail) . ' ' .
                 'AND news_id = ' . (int) $news_id . ' ' .
@@ -481,7 +481,7 @@ class PublicNewsletter extends Newsletter {
             $this->sendWelcome($user_info, $attributes);
 
             $logger->finer('PublicNewsletter: generating subscription event after user confirmation.');
-            $dispatcher = &JDispatcher::getInstance();
+            $dispatcher = JDispatcher::getInstance();
             $params = array('news_id' => $this->get('id'),
                 'news_name' => $this->get('name'),
                 'subs_name' => $user_info['email'],
@@ -508,7 +508,7 @@ class PublicNewsletter extends Newsletter {
             return false;
 
         $news_id = $this->get('id');
-        $dbo = & JFactory::getDBO();
+        $dbo = JFactory::getDBO();
         $query = 'DELETE FROM #__jinc_subscriber ' .
                 'WHERE email = ' . $dbo->quote($usermail) . ' ' .
                 'AND news_id = ' . (int) $news_id . ' AND ' .
@@ -520,7 +520,7 @@ class PublicNewsletter extends Newsletter {
         if ($dbo->getAffectedRows() > 0) {
             $logger->finer('PublicNewsletter: generating unsubscription event after user confirmation.');
             // Triggering unsubscription event
-            $dispatcher = &JDispatcher::getInstance();
+            $dispatcher = JDispatcher::getInstance();
             $params = array('news_id' => $this->get('id'),
                 'news_name' => $this->get('name'),
                 'news_notify' => $this->get('notify'));

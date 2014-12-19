@@ -65,7 +65,7 @@ class ParameterProvider {
      *
      * @return integer
      */
-    function getMailTimeInterval() {
+    static function getMailTimeInterval() {
         $ret = (int) ParameterProvider::getParam('mail_time_interval', PARAMETERPROVIDER_MAIL_TIME_INTERVAL);
         $interval = ($ret < 0) ? PARAMETERPROVIDER_MAIL_TIME_INTERVAL : $ret;
         return $interval * 1000;
@@ -76,7 +76,7 @@ class ParameterProvider {
      *
      * @return integer
      */
-    function getMaxXStep() {
+    static function getMaxXStep() {
         $ret = (int) ParameterProvider::getParam('mail_x_step', PARAMETERPROVIDER_MAIL_X_STEP);
         return ($ret < 0) ? PARAMETERPROVIDER_MAIL_X_STEP : $ret;
     }
@@ -85,7 +85,7 @@ class ParameterProvider {
      * Method to get max number of recipients in BCC for a single mail.
      * @return integer
      */
-    function getMailMaxBcc() {
+    static function getMailMaxBcc() {
 
         $ret = (int) ParameterProvider::getParam('mail_max_bcc', PARAMETERPROVIDER_MAIL_MAX_BCC);
         return ($ret < 0) ? PARAMETERPROVIDER_MAIL_MAX_BCC : $ret;
@@ -96,7 +96,7 @@ class ParameterProvider {
      *
      * @return boolean
      */
-    function getSendMail() {
+    static function getSendMail() {
         $ret = (int) ParameterProvider::getParam('send_mail', PARAMETERPROVIDER_SEND_MAILS);
         return ($ret == 1) ? PARAMETERPROVIDER_SEND_MAILS : $ret;
     }
@@ -116,7 +116,7 @@ class ParameterProvider {
      *
      * @return integer
      */
-    function getChartSystem() {
+    static function getChartSystem() {
         $ret = (int) ParameterProvider::getParam('chart_system', PARAMETERPROVIDER_CHART_SYSTEM);
         return ($ret < 0) ? PARAMETERPROVIDER_CHART_SYSTEM : $ret;
     }
@@ -125,7 +125,7 @@ class ParameterProvider {
      * Method to get the application ajax log level.
      * @return integer
      */
-    function getAJAXLogLevel() {
+    static function getAJAXLogLevel() {
         $ret = (int) ParameterProvider::getParam('debug_ajax', PARAMETERPROVIDER_AJAX_LOG_LEVEL);
         return ($ret == 1);
     }
@@ -144,7 +144,7 @@ class ParameterProvider {
      *
      * @return integer
      */
-    function getDefaultNumMessages() {
+    static function getDefaultNumMessages() {
         return ((int) ParameterProvider::getParam('num_msg', PARAMETERPROVIDER_NUM_MSG));
     }
 
@@ -154,7 +154,7 @@ class ParameterProvider {
      *
      * @return boolean
      */
-    function getStopOnFail() {
+    static function getStopOnFail() {
         $ret = (int) ParameterProvider::getParam('stop_on_failure', PARAMETERPROVIDER_STOP_ON_FAILURE);
         return ($ret == 1) ? PARAMETERPROVIDER_STOP_ON_FAILURE : $ret;
     }

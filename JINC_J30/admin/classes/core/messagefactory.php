@@ -237,7 +237,7 @@ class MessageFactory {
             'GROUP BY id '.
             'ORDER BY start_time DESC';
         $logger->debug('MessageFactory: Executing query: ' . $query);
-        $dbo =& JFactory::getDBO();
+        $dbo = JFactory::getDBO();
         $dbo->setQuery($query);
         // Loading historical processes information from database
         $history = array();
@@ -307,7 +307,7 @@ class MessageFactory {
                 'LEFT JOIN #__users u ON s.user_id = u.id '. 
                 'WHERE proc_id=' . (int) $proc_id;
         $logger->debug('MessageFactory: Executing query: ' . $query);
-        $dbo =& JFactory::getDBO();
+        $dbo = JFactory::getDBO();
         $dbo->setQuery($query);
         // Loading historical processes information from database
         $report = array();
@@ -339,7 +339,7 @@ class MessageFactory {
         $query = 'DELETE FROM `#__jinc_report` ' .
                 'WHERE proc_id = ' . (int) $proc_id;
         $logger->debug('MessageFactory: Executing query: ' . $query);
-        $dbo =& JFactory::getDBO();
+        $dbo = JFactory::getDBO();
         $dbo->setQuery($query);
         
         if ($dbo->query()) {

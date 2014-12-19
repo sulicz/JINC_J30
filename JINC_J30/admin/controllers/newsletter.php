@@ -41,8 +41,8 @@ class JINCControllerNewsletter extends JControllerForm {
         jincimport('statistics.statisticfactory');
         jincimport('core.newsletterfactory');
 
-        $session = & JFactory::getSession();
-        $config = & JFactory::getConfig();
+        $session = JFactory::getSession();
+        $config = JFactory::getConfig();
         $tzoffset = $config->getValue('config.offset');
 
         $id = JRequest::getInt('id', 0);
@@ -50,8 +50,8 @@ class JINCControllerNewsletter extends JControllerForm {
         $time_type = JRequest::getInt('time_type', 0);
         $start_date = JRequest::getString('start_date');
         $end_date = JRequest::getString('end_date');
-        $sdate = & JFactory::getDate($start_date, $tzoffset);
-        $edate = & JFactory::getDate($end_date, $tzoffset);
+        $sdate = JFactory::getDate($start_date, $tzoffset);
+        $edate = JFactory::getDate($end_date, $tzoffset);
 
         $stat = StatisticFactory::getStatistic($stat_type, $time_type, $sdate->toUNIX(), $edate->toUNIX(), $id);
         $values = $stat->getValues();
@@ -67,7 +67,7 @@ class JINCControllerNewsletter extends JControllerForm {
         $time_format = $timeline->getJFormat();
 
         JRequest::setVar('view', 'stats');
-        $view = & $this->getView('stats', 'html');
+        $view = $this->getView('stats', 'html');
 
         $ninstance = NewsletterFactory::getInstance();
         if ($newsletters = $ninstance->loadNames()) {
@@ -106,7 +106,7 @@ class JINCControllerNewsletter extends JControllerForm {
             $csvfile = JRequest::getVar('csvfile', array(), 'FILES');
         }        
         
-        $view = & $this->getView('newsletter', 'html');
+        $view = $this->getView('newsletter', 'html');
         if (isset($csvfile['tmp_name']) && $csvfile['tmp_name'] != '' && !is_null($csvfile['tmp_name'])) {
             $mime = $csvfile['type'];
             if (true || $mime == 'application/x-csv' || $mime == 'text/csv' ||

@@ -83,7 +83,7 @@ class BulkMessage extends Message {
         jimport('joomla.filesystem.file');
         jincimport('utility.parameterprovider');
 
-        $mailmsg = & JFactory::getMailer();
+        $mailmsg = JFactory::getMailer();
         $root_uri = JURI::root();
 
         $sleeptime = ParameterProvider::getMailTimeInterval();
