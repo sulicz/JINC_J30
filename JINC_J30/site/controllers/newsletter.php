@@ -43,7 +43,7 @@ class NewslettersControllerNewsletter extends NewslettersController {
             $info['email'] = $user_mail;
 
         $model = $this->getModel('newsletter');
-        $gateway = & $this->getView('gateway', 'html');
+        $gateway = $this->getView('gateway', 'html');
         if ($model->subscribe($id, $info, $attributes, $mod_jinc, $notices)) {
             $gateway->assignRef('msg', $model->getState('message'));
             if ($af_redir > 0) {
@@ -74,7 +74,7 @@ class NewslettersControllerNewsletter extends NewslettersController {
             $info['email'] = $user_mail;
 
         $model = $this->getModel('newsletter');
-        $gateway = & $this->getView('gateway', 'html');
+        $gateway = $this->getView('gateway', 'html');
         if ($model->unsubscribe($id, $info)) {
             $gateway->assignRef('msg', $model->getState('message'));
         } else {
@@ -92,7 +92,7 @@ class NewslettersControllerNewsletter extends NewslettersController {
         $model = $this->getModel('newsletter');
 
         $model = $this->getModel('newsletter');
-        $gateway = & $this->getView('gateway', 'html');
+        $gateway = $this->getView('gateway', 'html');
         if ($model->confirm($id, $user_mail, $random)) {
             $msg = 'COM_JINC_INF001';
             $gateway->assignRef('msg', $msg);
@@ -111,7 +111,7 @@ class NewslettersControllerNewsletter extends NewslettersController {
         $model = $this->getModel('newsletter');
 
         $model = $this->getModel('newsletter');
-        $gateway = & $this->getView('gateway', 'html');
+        $gateway = $this->getView('gateway', 'html');
         if ($model->delconfirm($id, $user_mail, $random)) {
             $msg = 'COM_JINC_INF006';
             $gateway->assignRef('msg', $msg);
@@ -146,7 +146,7 @@ class NewslettersControllerNewsletter extends NewslettersController {
                 $mmsg[$id] = $model->getError();
             }
         }
-        $view = & $this->getView('gateway', 'html');
+        $view = $this->getView('gateway', 'html');
         $view->setLayout('multisubscription');
         $view->assignRef('mmsg', $mmsg);
         $view->display();

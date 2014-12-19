@@ -162,7 +162,7 @@ class NewsletterFactory {
         $query = 'SELECT id FROM #__jinc_newsletter n ' .
                 'WHERE on_subscription = 1 AND published = 1';
         $logger->debug('NewsletterFactory: Executing query: ' . $query);
-        $dbo = & JFactory::getDBO();
+        $dbo = JFactory::getDBO();
         $dbo->setQuery($query);
         // Loading newsletter information from database
         if ($result = $dbo->loadAssocList()) {
@@ -221,7 +221,7 @@ class NewsletterFactory {
                 'FROM #__jinc_attribute ' .
                 'WHERE name = \'' . $name . '\'';
         $logger->debug('NewsletterFactory: Executing query: ' . $query);
-        $dbo = & JFactory::getDBO();
+        $dbo = JFactory::getDBO();
         $dbo->setQuery($query);
         // Loading newsletter information from database
         if ($result = $dbo->loadAssocList()) {
@@ -257,7 +257,7 @@ class NewsletterFactory {
         $attributes = array();
         $query = 'SELECT id, name, description, name_i18n FROM #__jinc_attribute';
         $logger->debug('NewsletterFactory: Executing query: ' . $query);
-        $dbo = & JFactory::getDBO();
+        $dbo = JFactory::getDBO();
         $dbo->setQuery($query);
         // Loading newsletter information from database
         if ($result = $dbo->loadAssocList()) {
@@ -293,7 +293,7 @@ class NewsletterFactory {
         }
 
         $logger->debug('NewsletterFactory: executing query ' . $query);
-        $dbo = & JFactory::getDBO();
+        $dbo = JFactory::getDBO();
         $dbo->setQuery($query);
 
         if ($result = $dbo->loadObjectList()) {
@@ -320,7 +320,7 @@ class NewsletterFactory {
                 'FROM #__jinc_notice nt ' .
                 'WHERE id = ' . (int) $id;
         $logger->debug('NewsletterFactory: Executing query: ' . $query);
-        $dbo = & JFactory::getDBO();
+        $dbo = JFactory::getDBO();
         $dbo->setQuery($query);
         // Loading notice information from database
         if ($result = $dbo->loadAssocList()) {

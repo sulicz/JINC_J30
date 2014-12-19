@@ -61,7 +61,7 @@ class NewslettersModelNewsletter extends JModelLegacy {
             return false;
         }
 
-        $user = & JFactory::getUser();
+        $user = JFactory::getUser();
         $canSubscribe = $user->authorise('jinc.subscribe', 'com_jinc.newsletter.' . $id);
         if (($newsletter->getType() == NEWSLETTER_PRIVATE_NEWS) && ($user->guest))
             $canSubscribe = false;

@@ -29,7 +29,7 @@
  */
 
 class Randomizer {
-    function getRandomString($lenght = 31) {
+    static function getRandomString($lenght = 31) {
         $base = 'ABCDEFGHKLMNOPQRSTWXYZabcdefghjkmnpqrstwxyz123456789';
         $max = strlen($base) - 1;
         $activatecode = '';
