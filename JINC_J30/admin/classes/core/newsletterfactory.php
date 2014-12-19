@@ -48,7 +48,7 @@ class NewsletterFactory {
 
     }
 
-    function &getInstance() {
+    static function &getInstance() {
         static $instance = null;
         if (null === $instance) {
             $instance = new NewsletterFactory();
@@ -83,7 +83,7 @@ class NewsletterFactory {
                 'WHERE id = ' . (int) $id;
         $query .= ( $only_published) ? ' AND published = 1' : '';
         $logger->debug('NewsletterFactory: Executing query: ' . $query);
-        $dbo = & JFactory::getDBO();
+        $dbo = JFactory::getDBO();
         $dbo->setQuery($query);
         // Loading newsletter information from database
         if ($result = $dbo->loadAssocList()) {

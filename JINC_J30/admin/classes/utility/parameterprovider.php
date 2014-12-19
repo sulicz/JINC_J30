@@ -52,7 +52,7 @@ class ParameterProvider {
      * @param String $default Default parameter value
      * @return String Parameter value
      */
-    function getParam($name, $default) {
+    static function getParam($name, $default) {
         jimport('joomla.application.component.model');
 
         $params = JComponentHelper::getParams('com_jinc');
@@ -106,7 +106,7 @@ class ParameterProvider {
      *
      * @return integer
      */
-    function getLogLevel() {
+    static function getLogLevel() {
         $ret = (int) ParameterProvider::getParam('log_level', PARAMETERPROVIDER_LOG_LEVEL);
         return ($ret < 0) ? PARAMETERPROVIDER_LOG_LEVEL : $ret;
     }
@@ -135,7 +135,7 @@ class ParameterProvider {
      *
      * @return boolean
      */
-    function getHints() {
+    static function getHints() {
         return ((int) ParameterProvider::getParam('hints', PARAMETERPROVIDER_HINTS));
     }
 

@@ -38,7 +38,7 @@ define('HELP_ONLINE_BASE', 'http://lhacky.altervista.org/jextensions/');
  */
 class JINCHelper {
 
-    function _getXMLInfos($info) {
+    static function _getXMLInfos($info) {
         $folder = JPATH_ADMINISTRATOR . DIRECTORY_SEPARATOR . 'components' . DIRECTORY_SEPARATOR . 'com_jinc';
         if (JFolder::exists($folder)) {
             $xmlFilesInDir = JFolder::files($folder, 'com_jinc.xml');
@@ -69,24 +69,24 @@ class JINCHelper {
         }
     }
 
-    function getJINCVersion() {
+    static function getJINCVersion() {
         return JINCHelper::_getXMLInfos('version');
     }
 
-    function getJINCCopyright() {
+    static function getJINCCopyright() {
         return JINCHelper::_getXMLInfos('copyright');
     }
 
-    function getJINCLicense() {
+    static function getJINCLicense() {
         return 'GNU/GPL version 2.0';
     }
 
-    function helpOnLine($article_id) {
-        $bar = & JToolBar::getInstance();
+    static function helpOnLine($article_id) {
+        $bar = JToolBar::getInstance();
         $bar->appendButton('Link', 'help', 'help', HELP_ONLINE_BASE . 'index.php?option=com_content&view=article&id=' . $article_id);
     }
 
-    function getRealIpAddr() {
+    static function getRealIpAddr() {
         $ip = '0.0.0.0';
         if (!empty($_SERVER['HTTP_CLIENT_IP'])) {   
             $ip = $_SERVER['HTTP_CLIENT_IP'];

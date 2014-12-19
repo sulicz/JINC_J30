@@ -34,7 +34,7 @@ require_once 'unsubscriptionnotifyevent.php';
 jimport('joomla.registry.registry');
 jincimport('statistics.subscriptionevent');
 jincimport('statistics.unsubscriptionevent');
-$dispatcher = &JDispatcher::getInstance();
+$dispatcher = JDispatcher::getInstance();
 $dispatcher->register('jinc_subscribe', 'SubscriptionEvent');
 $dispatcher->register('jinc_unsubscribe', 'UnsubscriptionEvent');
 $dispatcher->register('jinc_subscribe', 'SubscriptionNotifyEvent');

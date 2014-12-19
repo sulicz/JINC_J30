@@ -46,7 +46,7 @@ class MessageFactory {
 
     }
 
-    function &getInstance() {
+    static function &getInstance() {
         static $instance = null;
         if (null === $instance) {
             $instance = new MessageFactory();
@@ -74,7 +74,7 @@ class MessageFactory {
             'LEFT JOIN #__jinc_newsletter n ON m.news_id = n.id ' .
             'WHERE m.id = ' . (int) $msg_id;
         $logger->debug('MessageFactory: Executing query: ' . $query);
-        $dbo =& JFactory::getDBO();
+        $dbo = JFactory::getDBO();
         $dbo->setQuery($query);
         // Loading message information from database
         if ($result = $dbo->loadAssocList()) {
@@ -119,7 +119,7 @@ class MessageFactory {
             'FROM #__jinc_template ' .
             'WHERE id = ' . (int) $tem_id;
         $logger->debug('MessageFactory: Executing query: ' . $query);
-        $dbo =& JFactory::getDBO();
+        $dbo = JFactory::getDBO();
         $dbo->setQuery($query);
         if (!$template_list = $dbo->loadAssocList())
             return false;
@@ -160,7 +160,7 @@ class MessageFactory {
             'WHERE msg_id = ' . (int) $msg_id . ' ' .
             'AND status != ' . PROCESS_STATUS_FINISHED;
         $logger->debug('MessageFactory: Executing query: ' . $query);
-        $dbo =& JFactory::getDBO();
+        $dbo = JFactory::getDBO();
         $dbo->setQuery($query);
         // Loading message information from database
         if ($result = $dbo->loadAssocList()) {

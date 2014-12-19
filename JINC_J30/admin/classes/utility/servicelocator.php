@@ -66,7 +66,7 @@ class ServiceLocator {
      * @staticvar ServiceLocator $instance
      * @return ServiceLocator
      */
-    function &getInstance() {
+    static function &getInstance() {
         static $instance = null;
         if (null === $instance) {
             $instance = new ServiceLocator();
