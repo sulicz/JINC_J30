@@ -29,7 +29,9 @@ class NewslettersModelNewsletter extends JModelLegacy {
         $servicelocator = ServiceLocator::getInstance();
         $logger = $servicelocator->getLogger();
 
-        $id = JRequest::getInt('id', 0, 'GET');
+        $jinput = JFactory::getApplication()->input;
+		$id     = $jinput->get('id', 1, 'INT');
+
         $result = array();
 
         $ninstance = NewsletterFactory::getInstance();
@@ -53,7 +55,9 @@ class NewslettersModelNewsletter extends JModelLegacy {
 
     function getData() {
         jincimport('core.newsletterfactory');
-        $id = JRequest::getInt('id', 0, 'GET');
+		$jinput = JFactory::getApplication()->input;
+		$id     = $jinput->get('id', 1, 'INT');
+		
 
         $ninstance = NewsletterFactory::getInstance();
         if (!($newsletter = $ninstance->loadNewsletter($id, true))) {
@@ -76,7 +80,8 @@ class NewslettersModelNewsletter extends JModelLegacy {
 
     function getNotice() {
         jincimport('core.newsletterfactory');
-        $id = JRequest::getInt('id', 0, 'GET');
+        $jinput = JFactory::getApplication()->input;
+		$id     = $jinput->get('id', 1, 'INT');
 
         $ninstance = NewsletterFactory::getInstance();
         if (!($newsletter = $ninstance->loadNewsletter($id, true))) {
