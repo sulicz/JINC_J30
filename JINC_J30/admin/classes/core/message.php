@@ -34,7 +34,7 @@ define('MESSAGE_TYPE_PERSONAL', 0);
 // Registering sending message event.
 jimport('joomla.registry.registry');
 jincimport('statistics.sentevent');
-$dispatcher = &JDispatcher::getInstance();
+$dispatcher = JDispatcher::getInstance();
 $dispatcher->register('jinc_sent', 'SentEvent');
 $dispatcher->register('jinc_sent', 'SentMsgEvent');
 

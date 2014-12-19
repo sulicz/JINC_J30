@@ -55,7 +55,7 @@ class TableNewsletter extends JTable {
      *
      * @return	int
      */
-    protected function _getAssetParentId() {
+    protected function _getAssetParentId(JTable $table=null, $id=null) {
         // Initialise variables.
         $assetId = null;
         $db = $this->getDbo();

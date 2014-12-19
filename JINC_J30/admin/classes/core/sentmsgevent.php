@@ -65,7 +65,7 @@ class SentMsgEvent extends JEvent {
         $news_id = (int) $args['news_id'];
         $msg_id = (int) $args['msg_id'];
 
-        $dbo = & JFactory::getDBO();
+        $dbo = JFactory::getDBO();
         $query = 'UPDATE #__jinc_newsletter SET lastsent = now() ' .
                 'WHERE id = ' . (int) $news_id;
         $dbo->setQuery($query);

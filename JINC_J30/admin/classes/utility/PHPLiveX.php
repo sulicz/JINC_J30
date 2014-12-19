@@ -56,14 +56,6 @@ class PHPLiveX {
     function PHPLiveX($functions = array()) {
         if(!empty($functions)) $this->Ajaxify($functions);
     }
-    /**
-     * Constructs the class and ajaxifies specified functions optionally
-     *
-     * @param Array $functions: array of function names to ajaxify
-     */
-    function __construct($functions = array()) {
-        if(!empty($functions)) $this->Ajaxify($functions);
-    }
 
     /**
      * Prepares specified functions for ajax requests

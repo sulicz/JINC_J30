@@ -35,7 +35,7 @@ class InputChecker {
      * @param String $email
      * @return boolean true if mail address is correct
      */
-    function checkMail($email) {
+    static function checkMail($email) {
         return preg_match("/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/i", $email) > 0;
         // return preg_match("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", $email) > 0;
     }

@@ -24,7 +24,7 @@ class JFormFieldJINCTemplate extends JFormField {
     protected $type = 'JINCTemplate';
 
     protected function getInput() {
-        $db = &JFactory::getDBO();
+        $db = JFactory::getDBO();
 
         $query = 'SELECT id AS value, name AS text FROM #__jinc_template';
         $db->setQuery( $query );

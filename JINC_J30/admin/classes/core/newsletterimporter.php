@@ -49,7 +49,7 @@ class NewsletterImporter {
         $this->_LINE_MAX_LENGTH = 10000;
     }
 
-    function &getInstance() {
+    static function &getInstance() {
         static $instance = null;
         if (null === $instance) {
             $instance = new NewsletterImporter();

@@ -21,7 +21,7 @@
 require_once JPATH_ADMINISTRATOR . DIRECTORY_SEPARATOR . 'components' . DIRECTORY_SEPARATOR . 'com_jinc' . DIRECTORY_SEPARATOR . 'classes' . DIRECTORY_SEPARATOR . 'factory.php';
 jincimport('core.newsletter');
 
-$user = & JFactory::getUser();
+$user = JFactory::getUser();
 $query = 'SELECT n.id, n.name, n.type ' .
         'FROM #__jinc_newsletter n ' .
         'WHERE n.published = 1 ';

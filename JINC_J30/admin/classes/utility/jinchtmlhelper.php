@@ -28,7 +28,7 @@
  * @since		0.6
  */
 class JINCHTMLHelper {
-    function quickIconButton( $link, $image, $text, $attribs = "" ) {
+    static function quickIconButton( $link, $image, $text, $attribs = "" ) {
         $button = '<div style="float:left;">';
         $button .=	'<div class="jinc_thumbcell">'
             .'<a href="'.$link.'" ' . $attribs . '>'
@@ -40,7 +40,7 @@ class JINCHTMLHelper {
         return $button;
     }
 
-    function hint($hint_name, $hint_title, $hint_header = '', $hint_footer = '', $force = false) {
+    static function hint($hint_name, $hint_title, $hint_header = '', $hint_footer = '', $force = false) {
         jincimport('utility.parameterprovider');
         $hinton = ParameterProvider::getHints();        
         if ( !$hinton && !$force) return;
@@ -54,7 +54,7 @@ class JINCHTMLHelper {
         echo '</fieldset></center></div>';
     }
 
-    function legend($legend_array, $img_base = 'components/com_jinc/assets/images/') {
+    static function legend($legend_array, $img_base = 'components/com_jinc/assets/images/') {
         echo '<table cellspacing="0" cellpadding="4" align="center">';
         echo '<tr align="center">';
         for ($i = 0 ; $i < count($legend_array) ; $i++) {

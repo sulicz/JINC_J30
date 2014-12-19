@@ -33,7 +33,7 @@
  */
 class JINCFrontnedHelper {
 
-    function listMessagesTitle($newsletter, $messages, $linkable) {
+    static function listMessagesTitle($newsletter, $messages, $linkable) {
         $base_jinc = JURI::base() . 'components/com_jinc/assets/images/icons/';
         $options = array('height' => 16, 'width' => 16, 'title' => JText::_('COM_JINC_ATTACHMENT'));
         $attach_img = JHTML::image($base_jinc . 'attachment.png', JText::_('COM_JINC_ATTACHMENT'), $options);
@@ -54,7 +54,7 @@ class JINCFrontnedHelper {
             $news_id = $newsletter->get('id');
             $unsub_link = JURI::root() . 'index.php?option=com_jinc&view=newsletter&layout=unsubscription&news_id=' . $news_id;
             $body = preg_replace('/\[UNSUBSCRIPTIONURL\]/s', $unsub_link, $body);
-            $user = & JFactory::getUser();
+            $user = JFactory::getUser();
             if (!$user->guest) {
                 $user_mail = $user->get('email');
                 $userid = $user->get('username');
@@ -93,7 +93,7 @@ class JINCFrontnedHelper {
         }
     }
 
-    function listMessages($newsletter, $messages) {
+    static function listMessages($newsletter, $messages) {
         jincimport('core.newsletter');
         $front_type = $newsletter->get('front_type');
         if ($front_type == NEWSLETTER_FRONT_TYPE_ONLY_TITLE) {
@@ -107,7 +107,7 @@ class JINCFrontnedHelper {
         }
     }
 
-    function showMessage($newsletter, $message) {
+    static function showMessage($newsletter, $message) {
         jimport('joomla.registry.registry');
         if (is_subclass_of($message, 'Message')) {
             $subject = $message->get('subject');
@@ -127,7 +127,7 @@ class JINCFrontnedHelper {
         $news_id = $newsletter->get('id');
         $unsub_link = JURI::root() . 'index.php?option=com_jinc&view=newsletter&layout=unsubscription&news_id=' . $news_id;
         $body = preg_replace('/\[UNSUBSCRIPTIONURL\]/s', $unsub_link, $body);
-        $user = & JFactory::getUser();
+        $user = JFactory::getUser();
         if (!$user->guest) {
             $user_mail = $user->get('email');
             $userid = $user->get('username');

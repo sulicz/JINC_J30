@@ -43,7 +43,7 @@ jincimport('utility.jinceditor');
                 <?php
                 $formArray = array('name', 'subject');
                 $jeditor = new JINCEditor('jform[body]');
-                $this->printTabBodyGeneral('general', $formArray, array('body', $jeditor));
+                $this->printTabTwoColumns('general', $formArray, array('body'), $jeditor);
                 $this->printTabBodyFieldset('css');                
                 ?>                
             </div>

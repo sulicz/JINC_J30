@@ -42,7 +42,7 @@ class JINCFactory {
  *
  * @param String $className Name of the class to import
  */
-    function jincimport($className, $component = 'com_jinc', $base = 'classes') {
+    static function jincimport($className, $component = 'com_jinc', $base = 'classes') {
         $parts = explode('.', $className); // Break apart at dots
         $newClassName = JPATH_ADMINISTRATOR.DIRECTORY_SEPARATOR.'components'.DIRECTORY_SEPARATOR.$component.DIRECTORY_SEPARATOR;
         $newClassName .= (strlen($base) > 0)?$base.DIRECTORY_SEPARATOR:'';

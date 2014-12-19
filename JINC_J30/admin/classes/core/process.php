@@ -223,7 +223,7 @@ class Process extends JINCObject {
             jincimport('utility.servicelocator');
             $servicelocator = ServiceLocator::getInstance();
             $logger = $servicelocator->getLogger();
-            $dbo = & JFactory::getDBO();
+            $dbo = JFactory::getDBO();
 
             $query = 'UPDATE #__jinc_process ' .
                     'SET status = ' . $status . ' ';
@@ -263,7 +263,7 @@ class Process extends JINCObject {
         jincimport('utility.servicelocator');
         $servicelocator = ServiceLocator::getInstance();
         $logger = $servicelocator->getLogger();
-        $dbo = & JFactory::getDBO();
+        $dbo = JFactory::getDBO();
         $query = 'SELECT status FROM #__jinc_process ' .
                 'WHERE id = ' . $this->get('id');
         $dbo->setQuery($query);
@@ -291,7 +291,7 @@ class Process extends JINCObject {
         jincimport('utility.servicelocator');
         $servicelocator = ServiceLocator::getInstance();
         $logger = $servicelocator->getLogger();
-        $dbo = & JFactory::getDBO();
+        $dbo = JFactory::getDBO();
         if (is_array($report_data)) {            
             foreach ($report_data as $subs_id => $error_code) {
                 $query = 'INSERT IGNORE INTO `#__jinc_report` (proc_id, subs_id, error_code) VALUES ' . 

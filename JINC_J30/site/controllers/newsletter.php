@@ -43,9 +43,10 @@ class NewslettersControllerNewsletter extends NewslettersController {
             $info['email'] = $user_mail;
 
         $model = $this->getModel('newsletter');
-        $gateway = & $this->getView('gateway', 'html');
+        $gateway = $this->getView('gateway', 'html');
         if ($model->subscribe($id, $info, $attributes, $mod_jinc, $notices)) {
-            $gateway->assignRef('msg', $model->getState('message'));
+        	$msg = $model->getState('message');
+            $gateway->assignRef('msg', $msg);
             if ($af_redir > 0) {
                 // require_once(JPATH_SITE . DIRECTORY_SEPARATOR . 'components' . DIRECTORY_SEPARATOR . 'com_content' . DIRECTORY_SEPARATOR . 'helpers' . DIRECTORY_SEPARATOR . 'route.php');
                 // $link = JRoute::_(ContentHelperRoute::getArticleRoute($af_redir));
@@ -55,7 +56,8 @@ class NewslettersControllerNewsletter extends NewslettersController {
                 $gateway->display();
             }
         } else {
-            $gateway->assignRef('msg', $model->getError());
+        	$msg = $model->getError();
+            $gateway->assignRef('msg', $msg);
             $gateway->setLayout('error');
             $gateway->display();
         }
@@ -74,11 +76,13 @@ class NewslettersControllerNewsletter extends NewslettersController {
             $info['email'] = $user_mail;
 
         $model = $this->getModel('newsletter');
-        $gateway = & $this->getView('gateway', 'html');
+        $gateway = $this->getView('gateway', 'html');
         if ($model->unsubscribe($id, $info)) {
-            $gateway->assignRef('msg', $model->getState('message'));
+        	$msg = $model->getState('message');
+            $gateway->assignRef('msg', $msg);
         } else {
-            $gateway->assignRef('msg', $model->getError());
+        	$msg = $model->getError();
+            $gateway->assignRef('msg', $msg);
             $gateway->setLayout('error');
         }
         $gateway->display();
@@ -92,12 +96,13 @@ class NewslettersControllerNewsletter extends NewslettersController {
         $model = $this->getModel('newsletter');
 
         $model = $this->getModel('newsletter');
-        $gateway = & $this->getView('gateway', 'html');
+        $gateway = $this->getView('gateway', 'html');
         if ($model->confirm($id, $user_mail, $random)) {
             $msg = 'COM_JINC_INF001';
             $gateway->assignRef('msg', $msg);
         } else {
-            $gateway->assignRef('msg', $model->getError());
+        	$state = $model->getError();
+            $gateway->assignRef('msg', $state);
             $gateway->setLayout('error');
         }
         $gateway->display();
@@ -111,12 +116,13 @@ class NewslettersControllerNewsletter extends NewslettersController {
         $model = $this->getModel('newsletter');
 
         $model = $this->getModel('newsletter');
-        $gateway = & $this->getView('gateway', 'html');
+        $gateway = $this->getView('gateway', 'html');
         if ($model->delconfirm($id, $user_mail, $random)) {
             $msg = 'COM_JINC_INF006';
             $gateway->assignRef('msg', $msg);
         } else {
-            $gateway->assignRef('msg', $model->getError());
+        	$msg = $model->getError();
+            $gateway->assignRef('msg', $msg);
             $gateway->setLayout('error');
         }
         $gateway->display();
@@ -146,7 +152,7 @@ class NewslettersControllerNewsletter extends NewslettersController {
                 $mmsg[$id] = $model->getError();
             }
         }
-        $view = & $this->getView('gateway', 'html');
+        $view = $this->getView('gateway', 'html');
         $view->setLayout('multisubscription');
         $view->assignRef('mmsg', $mmsg);
         $view->display();

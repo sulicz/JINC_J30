@@ -30,7 +30,7 @@ class JFormFieldJINCNotice extends JFormField {
     protected $type = 'JINCNewsletter';
 
     protected function getInput() {
-        $db = &JFactory::getDBO();
+        $db = JFactory::getDBO();
 
         $query = 'SELECT id AS value, name AS text FROM #__jinc_notice';
         $db->setQuery($query);

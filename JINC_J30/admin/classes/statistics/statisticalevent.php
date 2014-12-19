@@ -79,7 +79,7 @@ class StatisticalEvent extends JEvent {
             '(`type`, `date`, `news_id`) VALUES ' .
             '(' . (int) $this->_type . ', now(), ' . (int) $args['news_id'] . ')';
         $logger->debug('StatisticalEvent: Executing query: ' . $query);
-        $dbo =& JFactory::getDBO();
+        $dbo = JFactory::getDBO();
         $dbo->setQuery($query);
         if ( ! $dbo->query() ) return false;
         return true;
