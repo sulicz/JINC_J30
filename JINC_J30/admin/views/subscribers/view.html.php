@@ -21,22 +21,18 @@ defined('_JEXEC') or die();
 jincimport('jhelper.jincview');
 require_once JPATH_COMPONENT . '/models/fields/jincnewsletter.php';
 require_once JPATH_COMPONENT . '/models/fields/jincsubstate.php';
-
 class JINCViewSubscribers extends JINCView {
     protected $items;
     protected $pagination;
     protected $state;
     protected $tmpl;
-
     function display($tpl = null) {
         $this->items = $this->get('Items');
         $this->pagination = $this->get('Pagination');
         $this->state = $this->get('State');
-
         $this->addToolbar();
         parent::display($tpl);
     }
-
     protected function addToolbar() {
         JHTML::stylesheet('administrator/components/com_jinc/assets/css/jinc_admin.css');
         JToolBarHelper::title(JText::_('COM_JINC_MENU_SUBSCRIBERS'), 'jinc');
@@ -57,9 +53,9 @@ class JINCViewSubscribers extends JINCView {
      */
     protected function getSortFields() {          
         return array(
-            'id' => JText::_('COM_JINC_ID'),
             'n.name' => JText::_('COM_JINC_NEWS_NAME'),
             'subs_email' => JText::_('COM_JINC_MAIL_ADDRESS'),
+            'id' => JText::_('COM_JINC_ID'),
         );
     }        
 }

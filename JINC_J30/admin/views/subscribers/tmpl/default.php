@@ -24,10 +24,10 @@ $user = JFactory::getUser();
 jincimport('utility.jinchtmlhelper');
 jincimport('utility.jincjoomlahelper');
 
-$this->tmplListInit('TEMPLATE_LIST');
+$this->tmplListInit('SUBSCRIBERS_LIST');
 ?>
 
-<form action="<?php echo JRoute::_('index.php?option=com_jinc&view=subscribers'); ?>" method="post" name="adminForm">
+<form action="<?php echo JRoute::_('index.php?option=com_jinc&view=subscribers'); ?>" method="post" name="adminForm" id="adminForm"> 
     <?php
     $this->tmplListFormInit();
     ?>
@@ -45,9 +45,8 @@ $this->tmplListInit('TEMPLATE_LIST');
         <tbody>
             <?php
             foreach ($this->items as $i => $item) :
-                $link = JRoute::_('index.php?option=com_jinc&view=newsletter&task=newsletter.edit&id=' . $item->id);
                 ?>
-                <tr>
+                <tr class="row<?php echo $i % 2; ?>">
                     <td class="center hidden-phone">
                         <?php echo JHtml::_('grid.id', $i, $item->id); ?>
                     </td>
@@ -56,10 +55,17 @@ $this->tmplListInit('TEMPLATE_LIST');
                             <a class="modal" href="index.php?option=com_jinc&view=subscriber&tmpl=component&id=<?php echo $item->id; ?>" rel="{handler: 'iframe', size: {x: 875, y: 550}, onClose: function() {}}">
                                 <?php echo $item->subs_email; ?>
                             </a>
+                            <?php                        
+                              if (strlen($item->random) > 0) {
+                                if (is_null($item->datasub)) {
+                                    echo '&nbsp;&nbsp;&nbsp;&nbsp;(' . JText::_('COM_JINC_WAITING_OPTIN') . ")</i>";
+                                }
+                              }
+                            ?>
                         </div>
                     </td>
                     <td>
-                        <a href="<?php echo $link; ?>"><?php echo $item->name; ?></a>
+                        <a href="<?php echo JRoute::_('index.php?option=com_jinc&view=newsletter&task=newsletter.edit&id=' . $item->id); ?>"><?php echo $item->name; ?></a>
                     </td>
                     <td class="center hidden-phone">
                         <?php echo (int) $item->id; ?>
